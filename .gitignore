@@ -1,3 +1,6 @@
+simple_game
+.idea*
+cmake-build-*
 CMakeCache.txt
 CMakeFiles
 CMakeScripts
