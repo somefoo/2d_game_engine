@@ -25,13 +25,11 @@ find_package(OpenMP REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
 find_package(GLEW REQUIRED)
+find_package(SDL2 REQUIRED)
 #find_package(PNG REQUIRED)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
 
-include_directories(${PNG_INCLUDE_DIR})
-include_directories()
-
-target_link_libraries(simple_game PRIVATE OpenMP::OpenMP_CXX ${OPENGL_LIBRARY} ${GLUT_LIBRARY} ${GLEW_LIBRARY} ${PNG_LIBRARY})
+target_link_libraries(simple_game PRIVATE OpenMP::OpenMP_CXX ${OPENGL_LIBRARY} ${GLUT_LIBRARY} ${GLEW_LIBRARY} ${SDL2_LIBRARIES})

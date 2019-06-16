@@ -30,11 +30,11 @@ void player::update(){
         y_velocity_ = (y_velocity_ <= -4) ? -4 : y_velocity_ - 1;
         pos.y += y_velocity_;
     }
-    if(!(hit_right && d_right <= 4) && key_event_manager::get_instance()->is_pressed('d')){
+    if(!(hit_right && d_right <= 4) && key_event_manager::get_instance()->is_pressed('D')){
         pos.x += 2;
         set_flip_x(false);
     }
-    if(!(hit_left && d_left <= 4) && key_event_manager::get_instance()->is_pressed('a')){
+    if(!(hit_left && d_left <= 4) && key_event_manager::get_instance()->is_pressed('A')){
         pos.x -= 2;
         set_flip_x(true);
     }
