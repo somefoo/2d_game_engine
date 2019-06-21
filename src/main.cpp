@@ -29,16 +29,18 @@ pthread_t raytracerThread;
 int frame=0, timebase=0;
 game g(WIDTH,HEIGHT);
  
-void processNormalKeys(unsigned char key) {
+void processNormalKeys(unsigned int key) {
+    if(key > 0x7F) return;
     if (key == 27) {
         exit(0);
     }
-    key_event_manager::get_instance()->set_key_press(key);
+    key_event_manager::get_instance()->set_key_press(char(key));
 }
 
 
-void processNormalKeysUp(unsigned char key) {
-    key_event_manager::get_instance()->reset_key_press(key);
+void processNormalKeysUp(unsigned int key) {
+    if(key > 0x7F) return;
+    key_event_manager::get_instance()->reset_key_press(char(key));
 }
 
 void *start_renderer(void *run_state){
@@ -88,7 +90,7 @@ int main(int argc, char **argv) {
 		//Initial window setup
     SDL_Window *sdlWindow;
     SDL_Renderer *sdlRenderer;
-    SDL_CreateWindowAndRenderer(0, 0, SDL_WINDOW_FULLSCREEN_DESKTOP, &sdlWindow, &sdlRenderer);
+    SDL_CreateWindowAndRenderer(WIDTH, HEIGHT, SDL_WINDOW_RESIZABLE, &sdlWindow, &sdlRenderer);
     SDL_SetRenderDrawColor(sdlRenderer, 0, 0, 0, 255);
     SDL_RenderClear(sdlRenderer);
     SDL_RenderPresent(sdlRenderer);
@@ -118,19 +120,17 @@ int main(int argc, char **argv) {
 			while(SDL_PollEvent(&event)){
 
 				if (event.type == SDL_KEYUP){
-					const char *c = SDL_GetKeyName(event.key.keysym.sym);
-          std::string input(c);
-          processNormalKeysUp(c[0]);
+          processNormalKeysUp(event.key.keysym.sym);
         }
 				if (event.type == SDL_KEYDOWN){
 					const char *c = SDL_GetKeyName(event.key.keysym.sym);
           std::string input(c);
-          if(input == "Escape") run_state.exited = true;
-          processNormalKeys(c[0]); 
-					//event.keysym.sy = 5;
+          if(input == "Escape") {run_state.exited = true; end_renderer();}
+          processNormalKeys(event.key.keysym.sym);
 				}
 			}
     }
+    
     SDL_DestroyTexture(sdlTexture);
     SDL_DestroyRenderer(sdlRenderer);
     SDL_DestroyWindow(sdlWindow);
