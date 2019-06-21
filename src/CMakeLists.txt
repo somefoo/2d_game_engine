@@ -22,9 +22,6 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR})
 add_executable(simple_game main.cpp ${simple_game_SRC})
 
 find_package(OpenMP REQUIRED)
-find_package(OpenGL REQUIRED)
-find_package(GLUT REQUIRED)
-find_package(GLEW REQUIRED)
 find_package(SDL2 REQUIRED)
 #find_package(PNG REQUIRED)
 
