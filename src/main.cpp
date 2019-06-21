@@ -118,7 +118,9 @@ int main(int argc, char **argv) {
 				std::this_thread::sleep_for(std::chrono::milliseconds(1));
 			}
 			while(SDL_PollEvent(&event)){
-
+        if (event.type == SDL_QUIT){
+          run_state.exited = true; end_renderer();
+        }
 				if (event.type == SDL_KEYUP){
           processNormalKeysUp(event.key.keysym.sym);
         }
