@@ -43,7 +43,7 @@ void processNormalKeysUp(unsigned int key) {
     key_event_manager::get_instance()->reset_key_press(char(key));
 }
 
-void *start_renderer(void *run_state){
+void *start_update(void *run_state){
     typedef std::chrono::high_resolution_clock Clock;
     int counter = 0;
     int msCounter = 0;
@@ -56,8 +56,8 @@ void *start_renderer(void *run_state){
 				std::lock_guard<std::mutex> lk(m);
 				//UPDATE AND RENDER HERE
         g.tic();
-				state->allow_draw = true;
         //Allow rendering
+				state->allow_draw = true;
         auto t2 = Clock::now();
         
         deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
@@ -73,7 +73,7 @@ void *start_renderer(void *run_state){
     pthread_exit(NULL);
 }
 
-void end_renderer(void){
+void end_update(void){
     run_state.exited = true;
     printf("Trying to exit application now.\n");
     pthread_join(raytracerThread, NULL);
@@ -82,7 +82,7 @@ void end_renderer(void){
 
 int main(int argc, char **argv) {
 
-    int threadC = pthread_create(&raytracerThread, NULL, start_renderer, (void*) &run_state);
+    int threadC = pthread_create(&raytracerThread, NULL, start_update, (void*) &run_state);
     if(threadC){
         printf("Failed to create rendering thread, exiting.\n");
         exit(-1);
@@ -119,7 +119,7 @@ int main(int argc, char **argv) {
 			}
 			while(SDL_PollEvent(&event)){
         if (event.type == SDL_QUIT){
-          run_state.exited = true; end_renderer();
+          run_state.exited = true; end_update();
         }
 				if (event.type == SDL_KEYUP){
           processNormalKeysUp(event.key.keysym.sym);
@@ -127,7 +127,7 @@ int main(int argc, char **argv) {
 				if (event.type == SDL_KEYDOWN){
 					const char *c = SDL_GetKeyName(event.key.keysym.sym);
           std::string input(c);
-          if(input == "Escape") {run_state.exited = true; end_renderer();}
+          if(input == "Escape") {run_state.exited = true; end_update();}
           processNormalKeys(event.key.keysym.sym);
 				}
 			}
