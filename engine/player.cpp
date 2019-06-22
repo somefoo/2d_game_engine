@@ -1,4 +1,5 @@
 #include "player.h"
+#include "instance_manager.h"
 #include "key_event_manager.h"
 #include "raycast_manager.h"
 #include "debug_draw_manager.h"

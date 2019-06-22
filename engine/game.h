@@ -6,6 +6,7 @@
 #include "camera.h"
 #include "raycast_manager.h"
 #include "debug_draw_manager.h"
+#include "sprite_manager.h"
 #include <vector>
 
 class game{
@@ -33,6 +34,7 @@ class game{
         sprites_.emplace_back(st);
         raycast_manager::get_instance()->set_global_object_vector(&objects_);
         debug_draw_manager::get_instance()->set_debug_object_vector(&debug_objects_);
+        sprite_manager::set_sprite_vector(&sprites_);
     }
     ~game(){
         //We are owner of all objects, delete them
