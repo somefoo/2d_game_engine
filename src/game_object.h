@@ -60,33 +60,65 @@ class game_object{
     //@param visible the initial visibility of the game object
     game_object(sprite* s, ivec2 position, short depth, bool visible);
     
+    //Sets the sprite of the object
+    //@param s the sprite that will be used
     void set_sprite(sprite* s);
+
+    //Sets the visibility of the game object (will still be updated)
+    //@param visible controls if sprite will be rendererd or not
     void set_visible(bool visible);
+
+    //Changes the position of the object
+    //@param position the new position of this object
     void set_position(ivec2 position);
+
+    //Changes the depth of the object (draw behind/infront)
+    //@param the depth that will be set
     void set_depth(short depth);
+
+    //@return the visibility of the object
     bool get_visible() const;    
+
+    //@return current position of the object
     ivec2 get_position() const;
+
+    //@return the depth of the object
     short get_depth() const;
+
+    //@return the current sprite of the object
     sprite const* get_sprite() const;
     
     //Checks if point lies within bounding box of sprite
+    //@param location the point that will be checked against the bounding box
+    //@return true if point lies within the bounding box
     bool hit_bounding_box(ivec2 location) const;
-    //Checks if sprite exists at location
+    //Checks if sprite exists (not 0) at location (pixel)
+    //@param location the point that will be checked against the sprite
+    //@return true if pixel != 0 at location, false otherwise
     bool hit(ivec2 location) const;
     //Checks if bounding box penetrated by ray
-    //dist pointer to float value where distance will be written to if hit
+    //param[in] origin origin of ray
+    //param[in] direction direction of the ray
+    //param[out] dist pointer to float value where distance will be written to if hit
     bool hit_ray_bounding_box(const ivec2 origin, const ivec2 direction, int *dist) const;
     
-     //Set the flip value for the x axis
+    //Set the flip value for the x axis
+    //@param flip flips or not
     void set_flip_x(bool flip);
-    //Set the flip value for the y axis
-    void set_flip_y(bool flip);
-    bool get_flip_x(void) const;
-    bool get_flip_y(void) const;
 
+    //Set the flip value for the y axis
+    //@param flip flips or not
+    void set_flip_y(bool flip);
+
+    //@return x flip value
+    bool get_flip_x(void) const;
+
+    //@return y flip value
+    bool get_flip_y(void) const;
 
     //Flips the sprite on the x axis
     void flip_x(void);
+
     //Flips the sprite on the y axis
     void flip_y(void);
 

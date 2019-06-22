@@ -5,11 +5,24 @@
 #include <vector>
 class renderer{
     public:
+    //@width width of the framebuffer that will be used
+    //@height height of the framebuffer that will be used
     renderer(const int width, const int height);
+
+    //Clear the framebuffer
     void clear();
+
+    //Draw objects onto framebuffer
+    //@param objects pointer to object list that will be drawn
     void render(std::vector<game_object*> const* objects);
+
+    //Draw single object onto framebuffer
+    //@param o object that will be drawn
     void draw_object(const game_object * o);
+    
+    //@return pointer to framebuffer
     unsigned char const* get_framebuffer(void) const;
+    //@return pointer to the active camera
     camera* get_camera();
 
     private:
