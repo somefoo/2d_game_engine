@@ -8,6 +8,7 @@
 #include "debug_draw_manager.h"
 #include "sprite_manager.h"
 #include <vector>
+#include <iostream>
 
 class game{
     public:
@@ -32,8 +33,8 @@ class game{
         objects_.emplace_back(ti_right);
         objects_.emplace_back(ti_bot);
         objects_.emplace_back(ti_top);
-        raycast_manager::get_instance()->set_global_object_vector(&objects_);
-        debug_draw_manager::get_instance()->set_debug_object_vector(&debug_objects_);
+        debug_draw_ge::set_debug_object_vector(&debug_objects_);
+        raycast_ge::set_global_object_vector(&objects_);
     }
     ~game(){
         //We are owner of all objects, delete them

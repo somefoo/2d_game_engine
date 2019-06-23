@@ -34,13 +34,13 @@ void processNormalKeys(unsigned int key) {
     if (key == 27) {
         exit(0);
     }
-    key_event_manager::get_instance()->set_key_press(char(key));
+    key_event_ge::set_key_press(char(key));
 }
 
 
 void processNormalKeysUp(unsigned int key) {
     if(key > 0x7F) return;
-    key_event_manager::get_instance()->reset_key_press(char(key));
+    key_event_ge::reset_key_press(char(key));
 }
 
 void *start_update(void *run_state){
