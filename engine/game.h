@@ -7,6 +7,7 @@
 #include "raycast_manager.h"
 #include "debug_draw_manager.h"
 #include "sprite_manager.h"
+#include "instance_manager.h"
 #include <vector>
 #include <iostream>
 
@@ -14,11 +15,14 @@ class game{
     public:
     game(int width, int height) : r_(width, height){
         sprite_ge::set_sprite_vector(&sprites_);
+        instance_ge::set_object_vector(&objects_);
         int sample_id = sprite_ge::load_sprite("sprites/sample3.png");
         int floor_id = sprite_ge::load_sprite("sprites/floor_example.png");
         
-        player* pl = new player(sprite_ge::get_loaded_sprite(sample_id));
-        pl->set_position({40, 40});
+        instance_ge::instantiate<player>(sprite_ge::get_loaded_sprite(sample_id));
+        objects_[0]->set_position({40,40});
+        //player* pl = new player(sprite_ge::get_loaded_sprite(sample_id));
+        //pl->set_position({40, 40});
 
         tile* ti_top = new tile(sprite_ge::get_loaded_sprite(floor_id));
         ti_top->set_position({0,100});
@@ -28,7 +32,7 @@ class game{
         tile* ti_right = new tile(sprite_ge::get_loaded_sprite(floor_id));
         ti_right->set_position({256 - 32,32});
 
-        objects_.emplace_back(pl);
+        //objects_.emplace_back(pl);
         objects_.emplace_back(ti_left);
         objects_.emplace_back(ti_right);
         objects_.emplace_back(ti_bot);
