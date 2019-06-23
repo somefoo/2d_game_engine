@@ -12,17 +12,19 @@
 class game{
     public:
     game(int width, int height) : r_(width, height){
-        sprite* sp = new sprite("sprites/sample3.png");
-        sprite* st = new sprite("sprites/floor_example.png");
-        player* pl = new player(sp);
+        sprite_ge::set_sprite_vector(&sprites_);
+        int sample_id = sprite_ge::load_sprite("sprites/sample3.png");
+        int floor_id = sprite_ge::load_sprite("sprites/floor_example.png");
+        
+        player* pl = new player(sprite_ge::get_loaded_sprite(sample_id));
         pl->set_position({40, 40});
 
-        tile* ti_top = new tile(st);
+        tile* ti_top = new tile(sprite_ge::get_loaded_sprite(floor_id));
         ti_top->set_position({0,100});
-        tile* ti_bot = new tile(st);
-        tile* ti_left = new tile(st);
+        tile* ti_bot = new tile(sprite_ge::get_loaded_sprite(floor_id));
+        tile* ti_left = new tile(sprite_ge::get_loaded_sprite(floor_id));
         ti_left->set_position({-256 + 21,32});
-        tile* ti_right = new tile(st);
+        tile* ti_right = new tile(sprite_ge::get_loaded_sprite(floor_id));
         ti_right->set_position({256 - 32,32});
 
         objects_.emplace_back(pl);
@@ -30,11 +32,8 @@ class game{
         objects_.emplace_back(ti_right);
         objects_.emplace_back(ti_bot);
         objects_.emplace_back(ti_top);
-        sprites_.emplace_back(sp);
-        sprites_.emplace_back(st);
         raycast_manager::get_instance()->set_global_object_vector(&objects_);
         debug_draw_manager::get_instance()->set_debug_object_vector(&debug_objects_);
-        sprite_manager::set_sprite_vector(&sprites_);
     }
     ~game(){
         //We are owner of all objects, delete them

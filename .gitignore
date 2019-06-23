@@ -1,5 +1,5 @@
 build*
-simple_game
+my_game
 .idea*
 cmake-build-*
 CMakeCache.txt
