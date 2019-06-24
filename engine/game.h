@@ -13,14 +13,14 @@
 
 class game {
  public:
-  game(int width, int height) : r_(width, height) {
-    sprite_ge::set_sprite_vector(&sprites_);
-    instance_ge::set_object_vector(&objects_);
+  game(int width, int height) : _r(width, height) {
+    sprite_ge::set_sprite_vector(&_sprites);
+    instance_ge::set_object_vector(&_objects);
     int sample_id = sprite_ge::load_sprite("sprites/sample3.png");
     int floor_id = sprite_ge::load_sprite("sprites/floor_example.png");
 
     instance_ge::instantiate<player>(sprite_ge::get_loaded_sprite(sample_id));
-    objects_[0]->set_position({40, 40});
+    _objects[0]->set_position({40, 40});
     // player* pl = new player(sprite_ge::get_loaded_sprite(sample_id));
     // pl->set_position({40, 40});
 
@@ -33,35 +33,35 @@ class game {
     ti_right->set_position({256 - 32, 32});
 
     // objects_.emplace_back(pl);
-    objects_.emplace_back(ti_left);
-    objects_.emplace_back(ti_right);
-    objects_.emplace_back(ti_bot);
-    objects_.emplace_back(ti_top);
-    debug_draw_ge::set_debug_object_vector(&debug_objects_);
-    raycast_ge::set_global_object_vector(&objects_);
+    _objects.emplace_back(ti_left);
+    _objects.emplace_back(ti_right);
+    _objects.emplace_back(ti_bot);
+    _objects.emplace_back(ti_top);
+    debug_draw_ge::set_debug_object_vector(&_debug_objects);
+    raycast_ge::set_global_object_vector(&_objects);
   }
   ~game() {
     // We are owner of all objects, delete them
-    for (auto v : objects_) {
+    for (auto v : _objects) {
       delete v;
     }
-    for (auto v : debug_objects_) {
+    for (auto v : _debug_objects) {
       delete v;
     }
-    for (auto v : sprites_) {
+    for (auto v : _sprites) {
       delete v;
     }
-    objects_.clear();
-    debug_objects_.clear();
-    sprites_.clear();
+    _objects.clear();
+    _debug_objects.clear();
+    _sprites.clear();
   }
 
   void tic();
   unsigned char const* get_framebuffer() const;
 
  private:
-  renderer r_;
-  std::vector<game_object*> debug_objects_;
-  std::vector<game_object*> objects_;
-  std::vector<sprite*> sprites_;
+  renderer _r;
+  std::vector<game_object*> _debug_objects;
+  std::vector<game_object*> _objects;
+  std::vector<sprite*> _sprites;
 };
