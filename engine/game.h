@@ -10,12 +10,16 @@
 #include "renderer.h"
 #include "sprite_manager.h"
 #include "tile.h"
+#include "../src/scene.h"
 
 class game {
  public:
   game(int width, int height) : _r(width, height) {
     sprite_ge::set_sprite_vector(&_sprites);
     instance_ge::set_object_vector(&_objects);
+    raycast_ge::set_global_object_vector(&_objects);
+    debug_draw_ge::set_debug_object_vector(&_debug_objects);
+
     int sample_id = sprite_ge::load_sprite("sprites/sample3.png");
     int floor_id = sprite_ge::load_sprite("sprites/floor_example.png");
 
@@ -37,8 +41,6 @@ class game {
     _objects.emplace_back(ti_right);
     _objects.emplace_back(ti_bot);
     _objects.emplace_back(ti_top);
-    debug_draw_ge::set_debug_object_vector(&_debug_objects);
-    raycast_ge::set_global_object_vector(&_objects);
   }
   ~game() {
     // We are owner of all objects, delete them
