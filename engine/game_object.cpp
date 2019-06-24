@@ -17,33 +17,33 @@ game_object::game_object(sprite* s, ivec2 position, short depth, bool visible) {
 
 void game_object::set_visible(bool visible) { visible_ = visible; }
 
-void game_object::set_depth(short depth) { depth_ = depth; }
+void game_object::set_depth(short depth) { _depth = depth; }
 
-void game_object::set_position(ivec2 position) { position_ = position; }
+void game_object::set_position(ivec2 position) { _position = position; }
 
-void game_object::set_sprite(sprite* s) { sprite_ = s; }
+void game_object::set_sprite(sprite* s) { _sprite = s; }
 
-short game_object::get_depth() const { return depth_; }
+short game_object::get_depth() const { return _depth; }
 
-ivec2 game_object::get_position() const { return position_; }
+ivec2 game_object::get_position() const { return _position; }
 
 bool game_object::get_visible() const { return visible_; }
 
-sprite const* game_object::get_sprite() const { return sprite_; }
+sprite const* game_object::get_sprite() const { return _sprite; }
 
 bool game_object::hit_bounding_box(const ivec2 location) const {
-  ivec2 relative_position = location - position_;
+  ivec2 relative_position = location - _position;
   if (relative_position.x < 0) return false;
   if (relative_position.y < 0) return false;
-  if (relative_position.x >= sprite_->get_width()) return false;
-  if (relative_position.y >= sprite_->get_height()) return false;
+  if (relative_position.x >= _sprite->get_width()) return false;
+  if (relative_position.y >= _sprite->get_height()) return false;
   return true;
 }
 bool game_object::hit(const ivec2 location) const {
   if (!hit_bounding_box(location)) return false;
-  ivec2 relative_position = location - position_;
+  ivec2 relative_position = location - _position;
 
-  if (sprite_->get_pixel(relative_position.x, relative_position.y) !=
+  if (_sprite->get_pixel(relative_position.x, relative_position.y) !=
       TRANSPARENT) {
     return true;
   }
@@ -54,9 +54,9 @@ bool game_object::hit(const ivec2 location) const {
 bool game_object::hit_ray_bounding_box(const ivec2 origin,
                                        const ivec2 direction, int* dist) const {
   (void)direction;
-  ivec2 relative_min = position_;
+  ivec2 relative_min = _position;
   ivec2 relative_max =
-      position_ + ivec2(sprite_->get_width(), sprite_->get_height());
+      _position + ivec2(_sprite->get_width(), _sprite->get_height());
 
   assert(direction.x * direction.y == 0);
 

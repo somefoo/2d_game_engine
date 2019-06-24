@@ -121,9 +121,9 @@ class game_object {
 
  private:
   // Do not call delete on this pointer, we are not owner
-  sprite* sprite_ = NULL;
-  ivec2 position_ = {0, 0};
-  short depth_ = 0;
+  sprite* _sprite = NULL;
+  ivec2 _position = {0, 0};
+  short _depth = 0;
   bool visible_ = true;
   bool flip_x_ = false;
   bool flip_y_ = false;
