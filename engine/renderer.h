@@ -1,40 +1,41 @@
 #pragma once
-#include "gsl-lite.h"
-#include "game_object.h"
-#include "camera.h"
 #include <vector>
-class renderer{
-    public:
-    //@width width of the framebuffer that will be used
-    //@height height of the framebuffer that will be used
-    renderer(const int width, const int height);
+#include "camera.h"
+#include "game_object.h"
+#include "gsl-lite.h"
+class renderer {
+ public:
+  //@width width of the framebuffer that will be used
+  //@height height of the framebuffer that will be used
+  renderer(const int width, const int height);
 
-    //Clear the framebuffer
-    void clear();
+  // Clear the framebuffer
+  void clear();
 
-    //Draw objects onto framebuffer
-    //@param objects pointer to object list that will be drawn
-    void render(std::vector<game_object*> const* objects);
+  // Draw objects onto framebuffer
+  //@param objects pointer to object list that will be drawn
+  void render(std::vector<game_object*> const* objects);
 
-    //Draw single object onto framebuffer
-    //@param o object that will be drawn
-    void draw_object(const game_object * o);
-    
-    //@return pointer to framebuffer
-    unsigned char const* get_framebuffer(void) const;
-    //@return pointer to the active camera
-    camera* get_camera();
+  // Draw single object onto framebuffer
+  //@param o object that will be drawn
+  void draw_object(const game_object* o);
 
-    private:
-    struct color{
-        unsigned char r : 3;
-        unsigned char g : 3;
-        unsigned char b : 2;
-    };
+  //@return pointer to framebuffer
+  unsigned char const* get_framebuffer(void) const;
+  //@return pointer to the active camera
+  camera* get_camera();
 
-    camera camera_;
-    const int width_;
-    const int height_;
-    std::vector<unsigned char> framebuffer_;
-    inline unsigned char create_color(unsigned char r, unsigned char g, unsigned char b);
+ private:
+  struct color {
+    unsigned char r : 3;
+    unsigned char g : 3;
+    unsigned char b : 2;
+  };
+
+  camera camera_;
+  const int width_;
+  const int height_;
+  std::vector<unsigned char> framebuffer_;
+  inline unsigned char create_color(unsigned char r, unsigned char g,
+                                    unsigned char b);
 };

@@ -9,7 +9,7 @@ std::unordered_map<std::string, unsigned int> sprite_list_;
 
 void set_sprite_vector(std::vector<sprite*>* sprites) {
   sprites_ = sprites;
-  //TODO crashes if I do not reserve (never initilised?)
+  // TODO crashes if I do not reserve (never initilised?)
   sprite_list_.reserve(1);
 }
 

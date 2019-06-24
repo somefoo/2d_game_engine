@@ -26,8 +26,7 @@ bool raycast(const ivec2 origin, const ivec2 direction, int *dist,
     *object = closest_object;
     *dist = closest_distance;
     debug_draw_ge::draw_green(origin);
-    debug_draw_ge::draw_magenta(
-        origin + (direction * ivec2(*dist, *dist)));
+    debug_draw_ge::draw_magenta(origin + (direction * ivec2(*dist, *dist)));
     return true;
   }
   return false;

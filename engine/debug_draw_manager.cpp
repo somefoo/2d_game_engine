@@ -24,11 +24,11 @@ void draw_green(ivec2 position) {
   _debug_objects->emplace_back(obj);
 }
 
-void clear(){
-    for(auto v : *_debug_objects){
-        delete v;
-    }
-    _debug_objects->clear();
+void clear() {
+  for (auto v : *_debug_objects) {
+    delete v;
+  }
+  _debug_objects->clear();
 }
 
-}  // namespace debug_draw_eg
+}  // namespace debug_draw_ge

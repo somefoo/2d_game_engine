@@ -1,6 +1,6 @@
 #pragma once
-#include "game_object.h"
 #include <vector>
+#include "game_object.h"
 namespace raycast_ge {
 // Casts a ray into the scene
 //@param[in] origin the origin of the ray
