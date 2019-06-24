@@ -11,15 +11,15 @@
 #include <assert.h>
 
 renderer::renderer(const int width, const int height)
-    : width_(width),
-      height_(height),
-      framebuffer_(height * width * sizeof(unsigned char), 0) {
+    : _width(width),
+      _height(height),
+      _framebuffer(height * width * sizeof(unsigned char), 0) {
   // empty
 }
 
 void renderer::clear() {
   // Clear screen
-  std::fill(framebuffer_.begin(), framebuffer_.end(), 0);
+  std::fill(_framebuffer.begin(), _framebuffer.end(), 0);
 }
 void renderer::render(std::vector<game_object *> const *objects) {
   for (auto o : *objects) {
@@ -28,7 +28,7 @@ void renderer::render(std::vector<game_object *> const *objects) {
 }
 
 void renderer::draw_object(const game_object *o) {
-  const ivec2 c = camera_.get_position();
+  const ivec2 c = _camera.get_position();
   const ivec2 p = o->get_position();
   const sprite *s = o->get_sprite();
   if (!s) return;  // TODO, this should somehwere else, sprite may be null!
@@ -40,10 +40,10 @@ void renderer::draw_object(const game_object *o) {
   //    @TODO what about black? This is ugly xD
 #define LOOP_CONTENT                                             \
   const int xx_v = xx++;                                         \
-  if (-c.x + p.x + x < 0 || -c.x + p.x + x >= width_) continue;  \
-  if (-c.y + p.y + y < 0 || -c.y + p.y + y >= height_) continue; \
+  if (-c.x + p.x + x < 0 || -c.x + p.x + x >= _width) continue;  \
+  if (-c.y + p.y + y < 0 || -c.y + p.y + y >= _height) continue; \
   unsigned char *pixel =                                         \
-      &framebuffer_[(p.x - c.x + x) + width_ * (p.y - c.y + y)]; \
+      &_framebuffer[(p.x - c.x + x) + _width * (p.y - c.y + y)]; \
   *pixel = s->get_pixel(xx_v, yy);
   int yy = 0;
   if (!flip_x && !flip_y)
@@ -81,10 +81,10 @@ void renderer::draw_object(const game_object *o) {
 }
 
 unsigned char const *renderer::get_framebuffer(void) const {
-  return framebuffer_.data();
+  return _framebuffer.data();
 }
 
-camera *renderer::get_camera() { return &camera_; }
+camera *renderer::get_camera() { return &_camera; }
 
 unsigned char renderer::create_color(unsigned char r, unsigned char g,
                                      unsigned char b) {

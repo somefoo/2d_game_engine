@@ -2,32 +2,32 @@
 #include <iostream>
 namespace sprite_ge {
 namespace {
-std::vector<sprite*>* sprites_;
+std::vector<sprite*>* _sprites;
 // Track loaded sprites
-std::unordered_map<std::string, unsigned int> sprite_list_;
+std::unordered_map<std::string, unsigned int> _sprite_list;
 }  // namespace
 
 void set_sprite_vector(std::vector<sprite*>* sprites) {
-  sprites_ = sprites;
+  _sprites = sprites;
   // TODO crashes if I do not reserve (never initilised?)
-  sprite_list_.reserve(1);
+  _sprite_list.reserve(1);
 }
 
 unsigned int load_sprite(std::string path) {
   // Has this sprite already been loaded?
-  if (sprite_list_.count(path) == 1) {
-    return sprite_list_[path];
+  if (_sprite_list.count(path) == 1) {
+    return _sprite_list[path];
   }
   sprite* s = new sprite(path);
-  sprites_->emplace_back(s);
+  _sprites->emplace_back(s);
 
-  const unsigned int id = sprites_->size() - 1;
-  sprite_list_[path] = id;
+  const unsigned int id = _sprites->size() - 1;
+  _sprite_list[path] = id;
   return id;
 }
 sprite* get_loaded_sprite(unsigned int id) {
-  assert(id < sprites_->size());
-  return sprites_->at(id);
+  assert(id < _sprites->size());
+  return _sprites->at(id);
 }
 
 }  // namespace sprite_ge

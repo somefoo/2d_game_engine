@@ -26,12 +26,12 @@ void player::update() {
   if ((hit_bot_left || hit_bot_right) &&
       (d_bot_left <= 4 || d_bot_right <= 4)) {
     // DO NOTHING
-    can_jump_ = true;
+    _can_jump = true;
     pos = pos + ivec2(0, 4 - std::min(d_bot_left, d_bot_right));
-    if (y_velocity_ >= 0) pos.y += y_velocity_;
+    if (_y_velocity >= 0) pos.y += _y_velocity;
   } else {
-    y_velocity_ = (y_velocity_ <= -4) ? -4 : y_velocity_ - 1;
-    pos.y += y_velocity_;
+    _y_velocity = (_y_velocity <= -4) ? -4 : _y_velocity - 1;
+    pos.y += _y_velocity;
   }
   if (!(hit_right && d_right <= 4) && key_event_ge::is_pressed('d')) {
     pos.x += 2;
@@ -41,10 +41,10 @@ void player::update() {
     pos.x -= 2;
     set_flip_x(true);
   }
-  if (key_event_ge::is_pressed(' ') && can_jump_) {
+  if (key_event_ge::is_pressed(' ') && _can_jump) {
     // set_flip_y(true);
-    y_velocity_ = 8;
-    can_jump_ = false;
+    _y_velocity = 8;
+    _can_jump = false;
     // pos.y += 4;
   }
   set_position(pos);

@@ -32,10 +32,10 @@ class renderer {
     unsigned char b : 2;
   };
 
-  camera camera_;
-  const int width_;
-  const int height_;
-  std::vector<unsigned char> framebuffer_;
+  camera _camera;
+  const int _width;
+  const int _height;
+  std::vector<unsigned char> _framebuffer;
   inline unsigned char create_color(unsigned char r, unsigned char g,
                                     unsigned char b);
 };

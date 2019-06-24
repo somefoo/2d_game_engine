@@ -6,6 +6,6 @@ class player : public game_object {
   void update();
 
  private:
-  int y_velocity_ = 0;
-  bool can_jump_ = true;
+  int _y_velocity = 0;
+  bool _can_jump = true;
 };
