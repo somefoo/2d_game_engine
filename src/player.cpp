@@ -1,10 +1,10 @@
 #include "player.h"
 #include <algorithm>
 #include <iostream>
-#include "debug_draw_manager.h"
-#include "instance_manager.h"
-#include "key_event_manager.h"
-#include "raycast_manager.h"
+#include "../engine/debug_draw_manager.h"
+#include "../engine/instance_manager.h"
+#include "../engine/key_event_manager.h"
+#include "../engine/raycast_manager.h"
 player::player(sprite* s) : game_object(s) {}
 
 void player::update() {

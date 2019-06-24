@@ -5,7 +5,6 @@
 #include <iostream>
 #include <random>
 #include "debug_draw_manager.h"
-#include "player.h"
 #include "sprite.h"
 //#define NDEBUG
 #include <assert.h>

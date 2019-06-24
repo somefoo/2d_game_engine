@@ -1,5 +1,5 @@
 #pragma once
-#include "game_object.h"
+#include "../engine/game_object.h"
 class player : public game_object {
  public:
   player(sprite* s);

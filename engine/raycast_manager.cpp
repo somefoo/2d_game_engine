@@ -15,6 +15,7 @@ bool raycast(const ivec2 origin, const ivec2 direction, int *dist,
   bool hit_object = false;
   // No acceleration structures...
   for (auto o : *_objects) {
+    if(!o->get_visible()) continue;
     bool hit = o->hit_ray_bounding_box(origin, direction, &tmp_distance);
     if (hit && (tmp_distance < closest_distance)) {
       hit_object = true;

@@ -4,6 +4,7 @@
 #include <iostream>
 game_object::game_object() {
   // Do nothing
+  set_visible(false);
 }
 
 game_object::game_object(sprite* s) { set_sprite(s); }
