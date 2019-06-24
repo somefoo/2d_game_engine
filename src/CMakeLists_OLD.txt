@@ -1,3 +1,5 @@
+include_directories("../engine")
+
 file(GLOB my_game_SRC
     "*.h"
     "*.cpp"

@@ -16,10 +16,13 @@ file(GLOB my_game_engine_SRC
     "*.h"
     "*.cpp"
     "*.hpp"
+    "../src/*.h"
+    "../src/*.cpp"
+    "../src/*.hpp"
 )
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR})
-add_executable(my_game main.cpp ${my_game_engine_SRC} ${my_game_SRC})
+add_executable(my_game main.cpp ${my_game_engine_SRC})
 
 find_package(OpenMP REQUIRED)
 find_package(SDL2 REQUIRED)
