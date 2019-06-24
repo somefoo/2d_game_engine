@@ -1,24 +1,22 @@
 #include "key_event_manager.h"
 #include <bitset>
 
-namespace key_event_ge{
-namespace{
-std::bitset<256> is_down_mask;
-std::bitset<256> is_pressed_mask;
-std::bitset<256> is_up_mask;
-}
+namespace key_event_ge {
+namespace {
+//std::bitset<256> is_down_mask;
+//std::bitset<256> is_up_mask;
+std::bitset<256> _is_pressed_mask;
+}  // namespace
 
-void set_key_press(unsigned char key){
-	is_pressed_mask.set(key);
-}
+//Sets the key in the pressed mask
+//@param key the key to be set in mask
+void set_key_press(unsigned char key) { _is_pressed_mask.set(key); }
 
-void reset_key_press(unsigned char key){
-    is_pressed_mask.reset(key);
-}
+//Resets (disables) key in the pressed mask
+//@param key the key to be unset in mask
+void reset_key_press(unsigned char key) { _is_pressed_mask.reset(key); }
 
-bool is_pressed(unsigned char key){
-    return is_pressed_mask.test(key);
-}
+//@return true if key is pressed
+bool is_pressed(unsigned char key) { return _is_pressed_mask.test(key); }
 
- 
-}
+}  // namespace key_event_ge

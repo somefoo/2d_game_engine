@@ -3,7 +3,7 @@
 #include "debug_draw_manager.h"
 namespace raycast_ge {
 namespace {
-std::vector<game_object *> *objects_;
+std::vector<game_object *> *_objects;
 }
 
 bool raycast(const ivec2 origin, const ivec2 direction, int *dist,
@@ -14,7 +14,7 @@ bool raycast(const ivec2 origin, const ivec2 direction, int *dist,
   int tmp_distance = std::numeric_limits<int>::max();
   bool hit_object = false;
   // No acceleration structures...
-  for (auto o : *objects_) {
+  for (auto o : *_objects) {
     bool hit = o->hit_ray_bounding_box(origin, direction, &tmp_distance);
     if (hit && (tmp_distance < closest_distance)) {
       hit_object = true;
@@ -34,7 +34,7 @@ bool raycast(const ivec2 origin, const ivec2 direction, int *dist,
 }
 
 void set_global_object_vector(std::vector<game_object *> *objects) {
-  objects_ = objects;
+  _objects = objects;
 }
 
 }  // namespace raycast_ge
