@@ -4,8 +4,8 @@
 namespace debug_draw_ge {
 namespace {
 std::vector<game_object *> *_debug_objects;
-sprite _magenta("sprites/debug/_magenta_dot.png");
-sprite _green("sprites/debug/_green_dot.png");
+sprite _magenta("sprites/debug/magenta_dot.png");
+sprite _green("sprites/debug/green_dot.png");
 }  // namespace
 
 void set_debug_object_vector(std::vector<game_object *> *debug_objects) {
