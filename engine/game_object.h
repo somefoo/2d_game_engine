@@ -124,7 +124,7 @@ class game_object {
   sprite* _sprite = NULL;
   ivec2 _position = {0, 0};
   short _depth = 0;
-  bool visible_ = true;
-  bool flip_x_ = false;
-  bool flip_y_ = false;
+  bool _visible = true;
+  bool _flip_x = false;
+  bool _flip_y = false;
 };

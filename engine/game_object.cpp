@@ -16,7 +16,7 @@ game_object::game_object(sprite* s, ivec2 position, short depth, bool visible) {
   set_visible(visible);
 }
 
-void game_object::set_visible(bool visible) { visible_ = visible; }
+void game_object::set_visible(bool visible) { _visible = visible; }
 
 void game_object::set_depth(short depth) { _depth = depth; }
 
@@ -28,7 +28,7 @@ short game_object::get_depth() const { return _depth; }
 
 ivec2 game_object::get_position() const { return _position; }
 
-bool game_object::get_visible() const { return visible_; }
+bool game_object::get_visible() const { return _visible; }
 
 sprite const* game_object::get_sprite() const { return _sprite; }
 
@@ -88,14 +88,14 @@ bool game_object::hit_ray_bounding_box(const ivec2 origin,
   return false;
 }
 
-void game_object::set_flip_x(bool flip) { flip_x_ = flip; }
+void game_object::set_flip_x(bool flip) { _flip_x = flip; }
 
-void game_object::set_flip_y(bool flip) { flip_y_ = flip; }
+void game_object::set_flip_y(bool flip) { _flip_y = flip; }
 
-bool game_object::get_flip_x(void) const { return flip_x_; }
+bool game_object::get_flip_x(void) const { return _flip_x; }
 
-bool game_object::get_flip_y(void) const { return flip_y_; }
+bool game_object::get_flip_y(void) const { return _flip_y; }
 
-void game_object::flip_x(void) { flip_x_ = !flip_x_; }
+void game_object::flip_x(void) { _flip_x = !_flip_x; }
 
-void game_object::flip_y(void) { flip_y_ = !flip_y_; }
+void game_object::flip_y(void) { _flip_y = !_flip_y; }
