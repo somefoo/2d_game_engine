@@ -10,19 +10,15 @@
 scene::scene() : game_object(){
   //Application entry point
   //Contruct game here!
-  int sample_id = sprite_ge::load_sprite("sprites/sample3.png");
-  int floor_id = sprite_ge::load_sprite("sprites/floor_example.png");
-  player* pl = instance_ge::instantiate<player>(sprite_ge::get_loaded_sprite(sample_id));
+  player* pl = instance_ge::instantiate<player>();
   pl->set_position({40,40});
-  
-  tile* tl = instance_ge::instantiate<tile>(sprite_ge::get_loaded_sprite(floor_id));
+  tile* tl = instance_ge::instantiate<tile>();
   tl->set_position({0,100});
-  tl = instance_ge::instantiate<tile>(sprite_ge::get_loaded_sprite(floor_id));
+  tl = instance_ge::instantiate<tile>();
   tl->set_position({-256 +21,32});
-  tl = instance_ge::instantiate<tile>(sprite_ge::get_loaded_sprite(floor_id));
+  tl = instance_ge::instantiate<tile>();
   tl->set_position({256 -32 ,32});
-  tl = instance_ge::instantiate<tile>(sprite_ge::get_loaded_sprite(floor_id));
-
+  tl = instance_ge::instantiate<tile>();
 
 }
 

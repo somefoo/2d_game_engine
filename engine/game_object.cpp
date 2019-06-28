@@ -2,18 +2,13 @@
 #include <algorithm>
 #include <cassert>
 #include <iostream>
-game_object::game_object() {
-  // Do nothing
+#include "sprite_manager.h"
+
+game_object::game_object(){std::cout << "base" << std::endl;}
+
+void game_object::init(void){
   set_visible(false);
-}
-
-game_object::game_object(sprite* s) { set_sprite(s); }
-
-game_object::game_object(sprite* s, ivec2 position, short depth, bool visible) {
-  set_sprite(s);
-  set_position(position);
-  set_depth(depth);
-  set_visible(visible);
+  //TODO draw standard object?
 }
 
 void game_object::set_visible(bool visible) { _visible = visible; }
@@ -22,7 +17,7 @@ void game_object::set_depth(short depth) { _depth = depth; }
 
 void game_object::set_position(ivec2 position) { _position = position; }
 
-void game_object::set_sprite(sprite* s) { _sprite = s; }
+void game_object::set_sprite(int id) { _sprite = sprite_ge::get_loaded_sprite(id); }
 
 short game_object::get_depth() const { return _depth; }
 
@@ -31,6 +26,7 @@ ivec2 game_object::get_position() const { return _position; }
 bool game_object::get_visible() const { return _visible; }
 
 sprite const* game_object::get_sprite() const { return _sprite; }
+int game_object::get_sprite_id() const { return _sprite_id; }
 
 bool game_object::hit_bounding_box(const ivec2 location) const {
   ivec2 relative_position = location - _position;

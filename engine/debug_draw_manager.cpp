@@ -1,11 +1,10 @@
 #include "debug_draw_manager.h"
-#include "tile.h"
+#include "debug_draw_element.h"
+#define draw 0
 
 namespace debug_draw_ge {
 namespace {
 std::vector<game_object *> *_debug_objects;
-sprite _magenta("sprites/debug/magenta_dot.png");
-sprite _green("sprites/debug/green_dot.png");
 }  // namespace
 
 void set_debug_object_vector(std::vector<game_object *> *debug_objects) {
@@ -13,15 +12,23 @@ void set_debug_object_vector(std::vector<game_object *> *debug_objects) {
 }
 
 void draw_magenta(ivec2 position) {
-  tile *obj = new tile(&_magenta);
+  //TODO why does this cause issues if src contains class with same name?
+#if draw
+  debug_draw_element *obj = new debug_draw_element();
+  obj->init();
   obj->set_position(position);
   _debug_objects->emplace_back(obj);
+#endif
 }
 
 void draw_green(ivec2 position) {
-  tile *obj = new tile(&_green);
+  //TODO actually include different colours
+#if draw
+  debug_draw_element *obj = new debug_draw_element();
+  obj->init();
   obj->set_position(position);
   _debug_objects->emplace_back(obj);
+#endif
 }
 
 void clear() {

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <random>
 #include "debug_draw_manager.h"
+#include "sprite_manager.h"
 #include "sprite.h"
 //#define NDEBUG
 #include <assert.h>
@@ -29,8 +30,9 @@ void renderer::render(std::vector<game_object *> const *objects) {
 void renderer::draw_object(const game_object *o) {
   const ivec2 c = _camera.get_position();
   const ivec2 p = o->get_position();
-  const sprite *s = o->get_sprite();
-  if (!s) return;  // TODO, this should somehwere else, sprite may be null!
+  const int sprite_id = o->get_sprite_id();
+  if(sprite_id < 0) return;
+  const sprite *s = sprite_ge::get_loaded_sprite(o->get_sprite_id());
   const int h = s->get_height();
   const int w = s->get_width();
   const bool flip_x = o->get_flip_x();

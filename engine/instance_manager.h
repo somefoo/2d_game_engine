@@ -18,20 +18,6 @@ void set_object_vector(std::vector<game_object *> *objects);
 void add(game_object *o);
 
 //Create an instance game_objects
-//@param s the sprite the instance should use
-//@tparam T the game_object class that should be instantiated
-template <class T>
-T* instantiate(sprite *s) {
-  static_assert(
-      std::is_base_of<game_object, T>::value,
-      "Only classes inheriting from game_object can be instantiated.");
-  //TODO ensure this constructor is always available.
-  T *n = new T(s);
-  add((game_object *)n);
-  return n;
-}
-
-//Create an instance game_objects
 //@tparam T the game_object class that should be instantiated
 template <class T>
 T* instantiate() {
@@ -41,6 +27,7 @@ T* instantiate() {
   //TODO ensure this constructor is always available.
   T *n = new T();
   add((game_object *)n);
+  n->init();
   return n;
 }
 }  // namespace instance_ge

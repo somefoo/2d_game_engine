@@ -23,8 +23,10 @@ unsigned int load_sprite(std::string path) {
 
   const unsigned int id = _sprites->size() - 1;
   _sprite_list[path] = id;
+  //std::cout << "Added <" << path << ">" << " with id: " << id << std::endl;
   return id;
 }
+
 sprite* get_loaded_sprite(unsigned int id) {
   assert(id < _sprites->size());
   return _sprites->at(id);

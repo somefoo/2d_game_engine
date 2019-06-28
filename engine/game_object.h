@@ -52,9 +52,12 @@ class game_object {
   //@param visible the initial visibility of the game object
   game_object(sprite* s, ivec2 position, short depth, bool visible);
 
+
+  virtual void init(void);
+
   // Sets the sprite of the object
   //@param s the sprite that will be used
-  void set_sprite(sprite* s);
+  void set_sprite(int id);
 
   // Sets the visibility of the game object (will still be updated)
   //@param visible controls if sprite will be rendererd or not
@@ -79,6 +82,9 @@ class game_object {
 
   //@return the current sprite of the object
   sprite const* get_sprite() const;
+
+  //@return the id of the current sprite
+  int get_sprite_id() const;
 
   // Checks if point lies within bounding box of sprite
   //@param location the point that will be checked against the bounding box
@@ -122,6 +128,7 @@ class game_object {
  private:
   // Do not call delete on this pointer, we are not owner
   sprite* _sprite = NULL;
+  int _sprite_id = -1;
   ivec2 _position = {0, 0};
   short _depth = 0;
   bool _visible = true;
