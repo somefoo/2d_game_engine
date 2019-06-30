@@ -1,6 +1,7 @@
 #include "camera.h"
 #include "key_event_manager.h"
 
+void camera::init(){};
 void camera::update() {
   // Do nothing
   ivec2 pos = get_position();

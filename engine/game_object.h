@@ -38,23 +38,20 @@ struct ivec2 {
 class game_object {
  public:
   virtual ~game_object() = default;
-  // Default constructor, creates objects without sprite
-  game_object();
 
-  // Creates a visible sprite at origin, with depth a depth of 0
-  //@param s a pointer to sprite
-  game_object(sprite* s);
-
-  // Creates a game object
-  //@param s a pointer to sprite
-  //@param position the initial position of the game object
-  //@param depth the initial depth of the game object
-  //@param visible the initial visibility of the game object
-  game_object(sprite* s, ivec2 position, short depth, bool visible);
+  // TODO I can't hide this constructor from subclasses
+  // as instance_manager is not a class and no "friend"
+  // relationships can exist
+  // Default constructor
+  game_object() = default;
 
   // Sets the sprite of the object
   //@param s the sprite that will be used
   void set_sprite(sprite* s);
+
+  // Sets the sprite id (the sprite) that will be used
+  // @param id the id of the sprite that will be used
+  void set_sprite(const int id);
 
   // Sets the visibility of the game object (will still be updated)
   //@param visible controls if sprite will be rendererd or not
@@ -69,16 +66,18 @@ class game_object {
   void set_depth(short depth);
 
   //@return the visibility of the object
-  bool get_visible() const;
+  bool get_visible(void) const;
 
   //@return current position of the object
-  ivec2 get_position() const;
+  ivec2 get_position(void) const;
 
   //@return the depth of the object
-  short get_depth() const;
+  short get_depth(void) const;
 
   //@return the current sprite of the object
-  sprite const* get_sprite() const;
+  sprite const* get_sprite(void) const;
+
+  int get_sprite_id(void) const;
 
   // Checks if point lies within bounding box of sprite
   //@param location the point that will be checked against the bounding box
@@ -117,11 +116,19 @@ class game_object {
   void flip_y(void);
 
   // Main update loop
-  virtual void update() = 0;
+  virtual void update(void) = 0;
+  
+  // Called on object creation
+  virtual void init(void) = 0;
 
  private:
   // Do not call delete on this pointer, we are not owner
-  sprite* _sprite = NULL;
+  sprite* _sprite = &_null_sprite;
+
+  //TODO how do I get this const?
+  static sprite _null_sprite;
+
+  int _sprite_id = -1;
   ivec2 _position = {0, 0};
   short _depth = 0;
   bool _visible = true;

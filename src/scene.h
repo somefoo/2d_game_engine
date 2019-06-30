@@ -2,6 +2,6 @@
 #include "../engine/game_object.h"
 class scene : public game_object{
     public:
-    scene();
+    void init();
     void update();
 };

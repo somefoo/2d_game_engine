@@ -1,11 +1,17 @@
 #include "debug_draw_manager.h"
-#include "tile.h"
 
 namespace debug_draw_ge {
 namespace {
 std::vector<game_object *> *_debug_objects;
 sprite _magenta("sprites/debug/magenta_dot.png");
 sprite _green("sprites/debug/green_dot.png");
+class tile : public game_object {
+ public:
+  tile(sprite *s){set_sprite(s);}
+  void init(void){};
+  void update(){};
+};
+
 }  // namespace
 
 void set_debug_object_vector(std::vector<game_object *> *debug_objects) {

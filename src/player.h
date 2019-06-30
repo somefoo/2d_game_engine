@@ -2,7 +2,7 @@
 #include "../engine/game_object.h"
 class player : public game_object {
  public:
-  player(sprite* s);
+  void init(void);
   void update();
 
  private:

@@ -13,17 +13,17 @@ void set_sprite_vector(std::vector<sprite*>* sprites) {
   _sprite_list.reserve(1);
 }
 
-unsigned int load_sprite(std::string path) {
+sprite* load_sprite(std::string path) {
   // Has this sprite already been loaded?
   if (_sprite_list.count(path) == 1) {
-    return _sprite_list[path];
+    return get_loaded_sprite(_sprite_list[path]);
   }
   sprite* s = new sprite(path);
   _sprites->emplace_back(s);
 
   const unsigned int id = _sprites->size() - 1;
   _sprite_list[path] = id;
-  return id;
+  return s;
 }
 sprite* get_loaded_sprite(unsigned int id) {
   assert(id < _sprites->size());

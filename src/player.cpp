@@ -5,7 +5,10 @@
 #include "../engine/instance_manager.h"
 #include "../engine/key_event_manager.h"
 #include "../engine/raycast_manager.h"
-player::player(sprite* s) : game_object(s) {}
+#include "../engine/sprite_manager.h"
+void player::init(void){
+  set_sprite(sprite_ge::load_sprite("sprites/sample3.png"));
+}
 
 void player::update() {
   debug_draw_ge::clear();
