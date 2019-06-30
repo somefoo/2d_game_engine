@@ -35,6 +35,8 @@ struct ivec2 {
   bool operator==(const ivec2& a) const { return (x == a.x && y == a.y); }
 };
 
+class game_object_accessor;
+
 class game_object {
  public:
   virtual ~game_object() = default;
@@ -122,9 +124,11 @@ class game_object {
   virtual void init(void) = 0;
 
  private:
+  friend void set_id(game_object& o, unsigned int value);
   // Do not call delete on this pointer, we are not owner
   sprite* _sprite = &_null_sprite;
 
+  unsigned int _id;
   //TODO how do I get this const?
   static sprite _null_sprite;
 
