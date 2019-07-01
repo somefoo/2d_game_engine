@@ -1,5 +1,5 @@
 #include "instance_manager.h"
-#include <type_traits>
+#include "game_object_accessor.h"
 
 namespace instance_ge {
 namespace {
@@ -11,6 +11,11 @@ void set_object_vector(std::vector<game_object *> *objects) {
 }
 
 
-void add(game_object *o) { _objects->emplace_back(o); }
+void add(game_object *o) {
+  game_object_accessor::set_id((game_object *)o, _objects->size());
+  _objects->emplace_back(o);
+  o->init();
+
+}
 
 }  // namespace instance_ge

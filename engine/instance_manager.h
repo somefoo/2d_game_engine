@@ -20,9 +20,8 @@ T* instantiate() {
       std::is_base_of<game_object, T>::value,
       "Only classes inheriting from game_object can be instantiated.");
   //TODO ensure this constructor is always available.
-  T *n = new T();
-  add((game_object *)n);
-  n->init();
-  return n;
+  T *o = new T();
+  add((game_object *)o);
+  return o;
 }
 }  // namespace instance_ge

@@ -8,6 +8,7 @@
 #include "../engine/sprite_manager.h"
 void player::init(void){
   set_sprite(sprite_ge::load_sprite("sprites/sample3.png"));
+  std::cout << "Player id: " << get_id() << std::endl;
 }
 
 void player::update() {

@@ -35,7 +35,7 @@ struct ivec2 {
   bool operator==(const ivec2& a) const { return (x == a.x && y == a.y); }
 };
 
-class game_object_accessor;
+//class game_object_accessor;
 
 class game_object {
  public:
