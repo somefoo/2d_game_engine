@@ -62,6 +62,9 @@ class game_object {
   // Changes the depth of the object (draw behind/infront)
   //@param the depth that will be set
   void set_depth(short depth);
+  
+  //@return the id of the object
+  unsigned int get_id(void) const;
 
   //@return the visibility of the object
   bool get_visible(void) const;

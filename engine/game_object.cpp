@@ -13,6 +13,8 @@ void game_object::set_position(ivec2 position) { _position = position; }
 
 void game_object::set_sprite(sprite* s) { _sprite = s; }
 
+unsigned int game_object::get_id() const {return _id;}
+
 short game_object::get_depth() const { return _depth; }
 
 ivec2 game_object::get_position() const { return _position; }

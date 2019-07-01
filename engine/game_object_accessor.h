@@ -6,10 +6,10 @@
 // that the game dev. cannot see.
 class game_object_accessor {
  public:
+  //TODO better to inline function and remove CPP?
   // Override the id of the game_object
   //@param o pointer to object that should be edited
   //@param value the id that will be assigned to object
-  static inline void set_id(game_object* o, unsigned int value) {
-    o->_id = value;
-  }
+  static void set_id(game_object* o, unsigned int value);
+
 };
