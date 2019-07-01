@@ -13,8 +13,6 @@ void game_object::set_position(ivec2 position) { _position = position; }
 
 void game_object::set_sprite(sprite* s) { _sprite = s; }
 
-void game_object::set_sprite(const int id){_sprite_id = id; }
-
 short game_object::get_depth() const { return _depth; }
 
 ivec2 game_object::get_position() const { return _position; }
@@ -22,8 +20,6 @@ ivec2 game_object::get_position() const { return _position; }
 bool game_object::get_visible() const { return _visible; }
 
 sprite const* game_object::get_sprite() const { return _sprite; }
-
-int game_object::get_sprite_id() const{ return _sprite_id; }
 
 bool game_object::hit_bounding_box(const ivec2 location) const {
   ivec2 relative_position = location - _position;

@@ -51,10 +51,6 @@ class game_object {
   //@param s the sprite that will be used
   void set_sprite(sprite* s);
 
-  // Sets the sprite id (the sprite) that will be used
-  // @param id the id of the sprite that will be used
-  void set_sprite(const int id);
-
   // Sets the visibility of the game object (will still be updated)
   //@param visible controls if sprite will be rendererd or not
   void set_visible(bool visible);
@@ -78,8 +74,6 @@ class game_object {
 
   //@return the current sprite of the object
   sprite const* get_sprite(void) const;
-
-  int get_sprite_id(void) const;
 
   // Checks if point lies within bounding box of sprite
   //@param location the point that will be checked against the bounding box
@@ -135,7 +129,6 @@ class game_object {
   //TODO how do I get this const?
   static sprite _null_sprite;
 
-  int _sprite_id = -1;
   ivec2 _position = {0, 0};
   short _depth = 0;
   bool _visible = true;
