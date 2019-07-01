@@ -17,18 +17,29 @@ void player::update() {
   ivec2 origin = get_position() + ivec2(s.x / 2, s.y / 2);
   ivec2 direction = {0, -1};
   game_object* hit_obj;
+  game_object* lhit_obj;
+  game_object* rhit_obj;
   int d_bot_left, d_bot_right, d_left, d_right, d_top;
   bool hit_bot_left = raycast_ge::raycast(origin - ivec2(s.x / 2), {0, -1},
-                                          &d_bot_right, &hit_obj);
+                                          &d_bot_right, &lhit_obj);
   bool hit_bot_right = raycast_ge::raycast(origin + ivec2(s.x / 2), {0, -1},
-                                           &d_bot_left, &hit_obj);
+                                           &d_bot_left, &rhit_obj);
   bool hit_top = raycast_ge::raycast(origin, {0, 1}, &d_top, &hit_obj);
   bool hit_left = raycast_ge::raycast(origin, {-1, 0}, &d_left, &hit_obj);
   bool hit_right = raycast_ge::raycast(origin, {1, 0}, &d_right, &hit_obj);
   ivec2 pos = get_position();
 
+  if(hit_bot_left && lhit_obj->get_name() == "Enemy"){
+    instance_ge::destroy(lhit_obj);
+  
+  }
+
+
   if ((hit_bot_left || hit_bot_right) &&
       (d_bot_left <= 4 || d_bot_right <= 4)) {
+    //if(lhit_obj->get_name() == "Enemy"){
+      //instance_ge::destroy(lhit_obj);
+    //}
     // DO NOTHING
     _can_jump = true;
     pos = pos + ivec2(0, 4 - std::min(d_bot_left, d_bot_right));

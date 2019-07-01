@@ -7,6 +7,10 @@ std::vector<game_object *> *_objects;
 
 }
 
+//TODO if we destroy an object within a loop
+//it will cause a crash, as the update
+//loop does not know the updated size.
+//SOLUTION: Delete after update
 void destroy(game_object* o){
   game_object* tail = _objects->back();
   if(o != tail){
