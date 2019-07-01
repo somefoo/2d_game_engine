@@ -6,9 +6,7 @@
 //that the game dev. cannot see.
 class game_object_accessor{
   //Override the id of the game_object
-  static void set_id(game_object& o, unsigned int value){
+  static inline void set_id(game_object& o, unsigned int value){
     o._id = value;
   }
-
-
 };
