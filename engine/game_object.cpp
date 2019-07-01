@@ -3,7 +3,9 @@
 #include <cassert>
 #include <iostream>
 
-sprite game_object::_null_sprite{"sprites/debug/missing_sprite.png"};  
+sprite game_object::_null_sprite{"sprites/debug/missing_sprite.png"};
+
+void game_object::set_name(std::string name) { _name = name; }
 
 void game_object::set_visible(bool visible) { _visible = visible; }
 
@@ -13,7 +15,9 @@ void game_object::set_position(ivec2 position) { _position = position; }
 
 void game_object::set_sprite(sprite* s) { _sprite = s; }
 
-unsigned int game_object::get_id() const {return _id;}
+const std::string game_object::get_name() const { return _name; }
+
+unsigned int game_object::get_id() const { return _id; }
 
 short game_object::get_depth() const { return _depth; }
 

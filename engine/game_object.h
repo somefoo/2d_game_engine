@@ -47,6 +47,9 @@ class game_object {
   // Default constructor
   game_object() = default;
 
+  //Sets the name of the object
+  void set_name(std::string name);
+
   // Sets the sprite of the object
   //@param s the sprite that will be used
   void set_sprite(sprite* s);
@@ -63,6 +66,9 @@ class game_object {
   //@param the depth that will be set
   void set_depth(short depth);
   
+  //@return the name of the object
+  const std::string get_name(void) const;
+
   //@return the id of the object
   unsigned int get_id(void) const;
 
@@ -137,4 +143,5 @@ class game_object {
   bool _visible = true;
   bool _flip_x = false;
   bool _flip_y = false;
+  std::string _name = "Game Object";
 };
