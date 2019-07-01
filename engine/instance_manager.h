@@ -10,7 +10,12 @@ namespace instance_ge {
 void set_object_vector(std::vector<game_object *> *objects);
 
 //Adds object to object list
+//@param o pointer to object that will be added
 void add(game_object *o);
+
+//Removes object
+//@param o piointer to object that will be destroyed/removed.
+void destroy(game_object *o);
 
 //Create an instance game_objects
 //@tparam T the game_object class that should be instantiated
