@@ -124,7 +124,10 @@ class game_object {
   virtual void init(void) = 0;
 
  private:
-  friend void set_id(game_object& o, unsigned int value);
+  //We need a way to allow access to the object
+  //without giving sub-classes access
+  friend class game_object_accessor;
+  
   // Do not call delete on this pointer, we are not owner
   sprite* _sprite = &_null_sprite;
 
