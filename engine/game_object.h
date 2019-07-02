@@ -1,6 +1,5 @@
 #pragma once
 #include "sprite.h"
-#include "game_controller.h"
 
 struct ivec2 {
   short x;
