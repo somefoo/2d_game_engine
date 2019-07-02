@@ -1,3 +1,4 @@
+#pragma once
 #include "debug_draw_manager.h"
 #include "instance_manager.h"
 #include "key_event_manager.h"
