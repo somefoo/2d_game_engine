@@ -9,6 +9,10 @@ namespace instance_ge {
 //@param objects the vector of objects used to instantiation
 void set_object_vector(std::vector<game_object *> *objects);
 
+// Clean object list after update finished
+// Removes deleted_object stumps
+void cleanup(void);
+
 //Adds object to object list
 //@param o pointer to object that will be added
 void add(game_object *o);

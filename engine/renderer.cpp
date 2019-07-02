@@ -22,7 +22,9 @@ void renderer::clear() {
 }
 void renderer::render(std::vector<game_object *> const *objects) {
   for (auto o : *objects) {
-    draw_object(o);
+    if(o->get_visible()){
+      draw_object(o);
+    }
   }
 }
 

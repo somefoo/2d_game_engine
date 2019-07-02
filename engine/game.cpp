@@ -8,6 +8,8 @@ void game::tic() {
   _r.clear();
   _r.render(&_objects);
   _r.render(&_debug_objects);
+  instance_ge::cleanup();
+  debug_draw_ge::clear();
 }
 
 unsigned char const* game::get_framebuffer() const {

@@ -12,7 +12,7 @@ void player::init(void){
 }
 
 void player::update() {
-  debug_draw_ge::clear();
+//  debug_draw_ge::clear();
   ivec2 s(get_sprite()->get_width(), get_sprite()->get_height());
   ivec2 origin = get_position() + ivec2(s.x / 2, s.y / 2);
   ivec2 direction = {0, -1};
