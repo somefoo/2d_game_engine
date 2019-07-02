@@ -29,7 +29,7 @@ bool is_pressed(unsigned char key) { return key_event_ge::is_pressed(key); }
 //! @copydoc raycast_ge::raycast(const ivec2,const ivec2,int*,game_object**)
 bool raycast(const ivec2 origin, const ivec2 direction, int* dist,
              game_object** object) {
-  raycast_ge::raycast(origin, direction, dist, object);
+  return raycast_ge::raycast(origin, direction, dist, object);
 }
 
 }  // namespace game

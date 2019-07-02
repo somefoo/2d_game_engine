@@ -1,11 +1,7 @@
 #include "player.h"
 #include <algorithm>
 #include <iostream>
-#include "../engine/debug_draw_manager.h"
-#include "../engine/instance_manager.h"
-#include "../engine/key_event_manager.h"
-#include "../engine/raycast_manager.h"
-#include "../engine/sprite_manager.h"
+#include "../engine/game_controller.h"
 void player::init(void){
   set_sprite(sprite_ge::load_sprite("sprites/sample3.png"));
   std::cout << "Player id: " << get_id() << std::endl;
@@ -20,17 +16,17 @@ void player::update() {
   game_object* lhit_obj;
   game_object* rhit_obj;
   int d_bot_left, d_bot_right, d_left, d_right, d_top;
-  bool hit_bot_left = raycast_ge::raycast(origin - ivec2(s.x / 2), {0, -1},
+  bool hit_bot_left = game::raycast(origin - ivec2(s.x / 2), {0, -1},
                                           &d_bot_right, &lhit_obj);
-  bool hit_bot_right = raycast_ge::raycast(origin + ivec2(s.x / 2), {0, -1},
+  bool hit_bot_right = game::raycast(origin + ivec2(s.x / 2), {0, -1},
                                            &d_bot_left, &rhit_obj);
-  bool hit_top = raycast_ge::raycast(origin, {0, 1}, &d_top, &hit_obj);
-  bool hit_left = raycast_ge::raycast(origin, {-1, 0}, &d_left, &hit_obj);
-  bool hit_right = raycast_ge::raycast(origin, {1, 0}, &d_right, &hit_obj);
+  bool hit_top = game::raycast(origin, {0, 1}, &d_top, &hit_obj);
+  bool hit_left = game::raycast(origin, {-1, 0}, &d_left, &hit_obj);
+  bool hit_right = game::raycast(origin, {1, 0}, &d_right, &hit_obj);
   ivec2 pos = get_position();
 
   if(hit_bot_left && lhit_obj->get_name() == "Enemy"){
-    instance_ge::destroy(lhit_obj);
+    game::destroy(lhit_obj);
   
   }
 
@@ -48,15 +44,15 @@ void player::update() {
     _y_velocity = (_y_velocity <= -4) ? -4 : _y_velocity - 1;
     pos.y += _y_velocity;
   }
-  if (!(hit_right && d_right <= 4) && key_event_ge::is_pressed('d')) {
+  if (!(hit_right && d_right <= 4) && game::is_pressed('d')) {
     pos.x += 2;
     set_flip_x(false);
   }
-  if (!(hit_left && d_left <= 4) && key_event_ge::is_pressed('a')) {
+  if (!(hit_left && d_left <= 4) && game::is_pressed('a')) {
     pos.x -= 2;
     set_flip_x(true);
   }
-  if (key_event_ge::is_pressed(' ') && _can_jump) {
+  if (game::is_pressed(' ') && _can_jump) {
     // set_flip_y(true);
     _y_velocity = 8;
     _can_jump = false;
