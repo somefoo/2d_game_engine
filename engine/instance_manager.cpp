@@ -8,13 +8,14 @@ class deleted_game_object : public game_object {
   void update() {}
   void init() {
     set_visible(false);
+    set_name("Deleted");
   }
 };
 
 std::vector<game_object *> *_objects;
-// ALWAYS REMOVE FROM RIGHT
 std::vector<deleted_game_object> _deleted;
 
+//Removes a deleted_game_object from the _objects list
 void remove_deleted(game_object *o) {
   game_object *tail = _objects->back();
   if (o != tail) {
