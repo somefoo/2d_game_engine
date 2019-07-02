@@ -2,6 +2,7 @@
 #include "debug_draw_manager.h"
 #include "instance_manager.h"
 #include "key_event_manager.h"
+#include "raycast_manager.h"
 #include "sprite_manager.h"
 
 // Restricted view on the functions of the engine
@@ -24,4 +25,11 @@ void destroy(game_object* o) { instance_ge::destroy(o); }
 
 //! @copydoc key_event_ge::is_pressed(unsigned char)
 bool is_pressed(unsigned char key) { return key_event_ge::is_pressed(key); }
+
+//! @copydoc raycast_ge::raycast(const ivec2,const ivec2,int*,game_object**)
+bool raycast(const ivec2 origin, const ivec2 direction, int* dist,
+             game_object** object) {
+  raycast_ge::raycast(origin, direction, dist, object);
+}
+
 }  // namespace game
