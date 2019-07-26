@@ -4,11 +4,11 @@
 struct ivec2 {
   short x;
   short y;
-
+ 
   ivec2(int x = 0, int y = 0) : x(x), y(y) {
     // Empty
   }
-
+ 
   ivec2 operator+(const ivec2& a) const { return ivec2(x + a.x, y + a.y); }
   ivec2 operator-(const ivec2& a) const { return ivec2(x - a.x, y - a.y); }
   ivec2 operator*(const ivec2& a) const { return ivec2(x * a.x, y * a.y); }
@@ -33,6 +33,25 @@ struct ivec2 {
     return *this;
   }
   bool operator==(const ivec2& a) const { return (x == a.x && y == a.y); }
+};
+
+struct game_state{
+  bool m_visible:1;
+  bool m_flip_x:1;
+  bool m_flip_y:1;
+  char m_depth = 0;
+  short m_sprite_id = 0;
+  ivec2 m_position = {0,0};
+};
+
+struct engine_state{
+  //The id is not fixed, but can change during runtime
+  unsigned short m_id;
+  unsigned short m_dirty;
+};
+
+struct extra_state{
+  char m_name[12] = {'G','a','m','e',' ','O','b','j','e','c','t','\0'};
 };
 
 //class game_object_accessor;
@@ -131,6 +150,8 @@ class game_object {
   //without giving sub-classes access
   friend class game_object_accessor;
   
+//  state* object_state;
+
   // Do not call delete on this pointer, we are not owner
   sprite* _sprite = &_null_sprite;
 
