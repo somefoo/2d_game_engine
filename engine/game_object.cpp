@@ -58,23 +58,23 @@ bool game_object::hit_ray_bounding_box(const ivec2 origin,
 
   if (direction.y < 0) {
     // Downcast
-    if (relative_min.x < origin.x && relative_max.x > origin.x) {
+    if (relative_min.x <= origin.x && relative_max.x >= origin.x) {
       (*dist) = origin.y - relative_max.y;
       return (*dist) > 0;
     }
-  } else if (direction.y < 0) {
+  } else if (direction.y <= 0) {
     // Upcast
     if (relative_min.x < origin.x && relative_max.x > origin.x) {
       (*dist) = relative_min.y - origin.y;
       return (*dist) > 0;
     }
-  } else if (direction.x < 0) {
+  } else if (direction.x <= 0) {
     // Leftcast
     if (relative_min.y < origin.y && relative_max.y > origin.y) {
       (*dist) = origin.x - relative_max.x;
       return (*dist) > 0;
     }
-  } else if (direction.x > 0) {
+  } else if (direction.x >= 0) {
     if (relative_min.y < origin.y && relative_max.y > origin.y) {
       (*dist) = relative_min.x - origin.x;
       return (*dist) > 0;
