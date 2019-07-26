@@ -12,4 +12,6 @@ class game_object_accessor {
   //@param value the id that will be assigned to object
   static void set_id(game_object* o, unsigned int value);
 
+  static void set_engine_state(game_object *const o, engine_state *const s);
+
 };

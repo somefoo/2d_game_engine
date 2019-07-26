@@ -14,6 +14,9 @@ class deleted_game_object : public game_object {
 
 std::vector<game_object *> *_objects;
 std::vector<deleted_game_object> _deleted;
+std::vector<game_state> m_game_states;
+std::vector<engine_state> m_engine_states;
+std::vector<extra_state> m_extra_states;
 
 //Removes a deleted_game_object from the _objects list
 void remove_deleted(game_object *o) {
@@ -54,7 +57,10 @@ void set_object_vector(std::vector<game_object *> *objects) {
 }
 
 void add(game_object *o) {
+  m_engine_states.emplace_back();  
   game_object_accessor::set_id((game_object *)o, _objects->size());
+  const int last = m_engine_states.size();
+  game_object_accessor::set_engine_state((game_object *)o, &m_engine_states[last]);
   _objects->emplace_back(o);
   o->init();
 }

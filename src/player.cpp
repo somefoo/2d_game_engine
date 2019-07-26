@@ -5,6 +5,10 @@
 void player::init(void){
   set_sprite(game::load_sprite("sprites/sample3.png"));
   std::cout << "Player id: " << get_id() << std::endl;
+  std::cout << "size of game struct:" << sizeof(game_state) << std::endl;
+  std::cout << "size of eng struct:" << sizeof(engine_state) << std::endl;
+  std::cout << "s ivec" << sizeof(ivec2) << std::endl;
+  std::cout << "sprite_ptr" << sizeof(sprite*) << std::endl;
 }
 
 void player::update() {

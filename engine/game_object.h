@@ -36,16 +36,30 @@ struct ivec2 {
 };
 
 struct game_state{
+  game_state(){
+    m_visible = true;
+    m_flip_x = false;
+    m_flip_y = false;
+    m_depth = 0;
+    m_sprite_id = 0;
+    m_position = ivec2(0,0);
+  
+  }
+
   bool m_visible:1;
   bool m_flip_x:1;
   bool m_flip_y:1;
-  char m_depth = 0;
-  short m_sprite_id = 0;
+  char m_depth;
+  short m_sprite_id;
   ivec2 m_position = {0,0};
 };
 
 struct engine_state{
   //The id is not fixed, but can change during runtime
+  engine_state(){
+    m_id = 0;
+    m_dirty = 0;
+  }
   unsigned short m_id;
   unsigned short m_dirty;
 };
@@ -149,6 +163,7 @@ class game_object {
   //We need a way to allow access to the object
   //without giving sub-classes access
   friend class game_object_accessor;
+  engine_state* m_engine_state;
   
 //  state* object_state;
 
