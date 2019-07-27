@@ -3,6 +3,7 @@
 
 void camera::init(){};
 void camera::update() {
+  
   // Do nothing
   ivec2 pos = get_position();
   if (key_event_ge::is_pressed('j')) {
@@ -17,6 +18,9 @@ void camera::update() {
   if (key_event_ge::is_pressed('k')) {
     pos = pos + ivec2(0, -1);
   }
+  m_pos = pos;
+}
 
-  set_position(pos);
+ivec2 camera::get_position(){
+  return m_pos;
 }

@@ -9,7 +9,7 @@
 void scene::init(void){
   //Application entry point
   //Contruct game here!
-
+/*
   for(int i = 0; i < 60; ++i){
     tile* tl = game::instantiate<tile>();
     tl->set_position({i*8, 40});
@@ -29,6 +29,12 @@ void scene::init(void){
   pl->set_position({40,90});
   enemy* e = game::instantiate<enemy>();
   e->set_position({50,32});
+  */
+
+  tile* tl = game::instantiate<tile>();
+  tl->set_position({0,100});
+  //tile_large* t = game::instantiate<tile_large>();
+  //t->set_position({0,0});
 }
 
 void scene::update(){

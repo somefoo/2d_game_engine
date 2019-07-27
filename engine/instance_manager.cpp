@@ -56,6 +56,7 @@ void set_object_vector(std::vector<game_object *> *objects) {
 }
 
 void add(game_object *o) {
+  std::cout << "length of vector before" << m_engine_states.size() << std::endl;
   static unsigned int life_time_id_counter = 0;
   const unsigned short last = m_objects->size();
   m_engine_states.emplace_back();  
@@ -66,9 +67,10 @@ void add(game_object *o) {
   m_engine_states.back().m_lifetime_id = life_time_id_counter++; 
   m_objects->emplace_back(o);
   game_object_accessor::set_engine_state((game_object *)o, &m_engine_states.back());
+  std::cout << "length of vector after" << m_engine_states.size() << std::endl;
   o->init();
   //std::cout << m_extra_states.back().m_name << "ADD : "<<  game_object_accessor::get_engine_state((game_object *)o) << std::endl;
-  //std::cout << m_extra_states.back().m_name << " received ID: " << m_engine_states.back().m_positional_id <<  std::endl;
+  std::cout << m_extra_states.back().m_name << " received ID: " << m_engine_states.back().m_positional_id <<  std::endl;
 }
 
 }  // namespace instance_ge

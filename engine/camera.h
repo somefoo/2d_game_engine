@@ -1,8 +1,12 @@
 #pragma once
 #include "game_object.h"
-// Game object representing the camera
-class camera : public game_object {
+//object representing the camera
+class camera{
  public:
-  void init() override;
-  void update() override;
+  void init();
+  void update();
+  ivec2 get_position();
+private:
+  ivec2 m_pos;
+  
 };

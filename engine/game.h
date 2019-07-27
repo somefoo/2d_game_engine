@@ -18,7 +18,6 @@ class game {
     raycast_ge::set_global_object_vector(&_objects);
     debug_draw_ge::set_debug_object_vector(&_debug_objects);
     instance_ge::instantiate<scene>();
-
   }
   ~game() {
     // We are owner of all objects, delete them
