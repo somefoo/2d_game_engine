@@ -9,6 +9,16 @@ namespace instance_ge {
 //@param objects the vector of objects used to instantiation
 void set_object_vector(std::vector<game_object *> *objects);
 
+//Returns the game_state of the object with engine_state es
+//@param es the engine_state of the object
+//@return a pointer to the game_state of the object
+game_state* get_game_state(const engine_state *const es);
+
+//Returns the extra_state of the object with engine_state es
+//@param es the engine_state of the object
+//@return a pointer to the extra_state of the object
+extra_state* get_extra_state(const engine_state *const es);
+
 // Clean object list after update finished
 // Removes deleted_object stumps
 void cleanup(void);
@@ -18,8 +28,8 @@ void cleanup(void);
 void add(game_object *o);
 
 //Removes object
-//@param o piointer to object that will be destroyed/removed.
-void destroy(game_object *o);
+//@param o pointer to engine state of the object that will be destroyed/removed.
+void destroy(engine_state *o);
 
 //Create an instance game_objects
 //@tparam T the game_object class that should be instantiated

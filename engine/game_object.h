@@ -57,11 +57,13 @@ struct game_state{
 struct engine_state{
   //The id is not fixed, but can change during runtime
   engine_state(){
-    m_id = 0;
-    m_dirty = 0;
+    m_lifetime_id = 0;
+    m_positional_id = 0;
+    m_dirty_deleted = 0;
   }
-  unsigned short m_id;
-  unsigned short m_dirty;
+  unsigned int m_lifetime_id;
+  unsigned short m_positional_id;
+  unsigned short m_dirty_deleted:1;
 };
 
 struct extra_state{
@@ -85,7 +87,7 @@ class game_object {
 
   // Sets the sprite of the object
   //@param s the sprite that will be used
-  void set_sprite(sprite* s);
+  void set_sprite(const unsigned short s);
 
   // Sets the visibility of the game object (will still be updated)
   //@param visible controls if sprite will be rendererd or not
@@ -97,7 +99,7 @@ class game_object {
 
   // Changes the depth of the object (draw behind/infront)
   //@param the depth that will be set
-  void set_depth(short depth);
+  void set_depth(char depth);
   
   //@return the name of the object
   const std::string get_name(void) const;
@@ -115,7 +117,7 @@ class game_object {
   short get_depth(void) const;
 
   //@return the current sprite of the object
-  sprite const* get_sprite(void) const;
+  unsigned short get_sprite(void) const;
 
   // Checks if point lies within bounding box of sprite
   //@param location the point that will be checked against the bounding box
@@ -153,6 +155,9 @@ class game_object {
   // Flips the sprite on the y axis
   void flip_y(void);
 
+  // Destroys the game object
+  void destroy(void) const;
+
   // Main update loop
   virtual void update(void) = 0;
   
@@ -164,20 +169,6 @@ class game_object {
   //without giving sub-classes access
   friend class game_object_accessor;
   engine_state* m_engine_state;
-  
-//  state* object_state;
-
-  // Do not call delete on this pointer, we are not owner
-  sprite* _sprite = &_null_sprite;
-
-  unsigned int _id;
-  //TODO how do I get this const?
-  static sprite _null_sprite;
-
-  ivec2 _position = {0, 0};
-  short _depth = 0;
-  bool _visible = true;
-  bool _flip_x = false;
-  bool _flip_y = false;
-  std::string _name = "Game Object";
+  game_state* get_game_state() const;
+  extra_state* get_extra_state() const;
 };

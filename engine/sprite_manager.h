@@ -9,8 +9,8 @@ void set_sprite_vector(std::vector<sprite*>* sprites);
 
 // Loads a sprite from memory
 //@param path path to the image file to load sprite from
-//@return pointer to sprite that was loaded
-sprite* load_sprite(std::string path);
+//@return id of sprite that was loaded
+unsigned short load_sprite(std::string path);
 
 //TODO not really needed anymore
 // Returns pointer to sprite with given id

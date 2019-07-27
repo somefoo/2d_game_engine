@@ -4,25 +4,23 @@
 #include "../engine/game_controller.h"
 void player::init(void){
   set_sprite(game::load_sprite("sprites/sample3.png"));
-  std::cout << "Player id: " << get_id() << std::endl;
-  std::cout << "size of game struct:" << sizeof(game_state) << std::endl;
-  std::cout << "size of eng struct:" << sizeof(engine_state) << std::endl;
-  std::cout << "s ivec" << sizeof(ivec2) << std::endl;
-  std::cout << "sprite_ptr" << sizeof(sprite*) << std::endl;
+  set_name("Player");
+  std::cout << "Player thinks his id is:" << get_id() << std::endl;
 }
 
 void player::update() {
+  std::cout << "Player thinks his rutime id is:" << get_id() << std::endl;
 //  debug_draw_ge::clear();
-  ivec2 s(get_sprite()->get_width(), get_sprite()->get_height());
-  ivec2 origin = get_position() + ivec2(s.x / 2, s.y / 2);
+  //ivec2 s(get_sprite()->get_width(), get_sprite()->get_height());
+  ivec2 origin = get_position() + ivec2(4, 4);
   ivec2 direction = {0, -1};
   game_object* hit_obj;
   game_object* lhit_obj;
   game_object* rhit_obj;
   int d_bot_left, d_bot_right, d_left, d_right, d_top;
-  bool hit_bot_left = game::raycast(origin - ivec2(s.x / 2), {0, -1},
+  bool hit_bot_left = game::raycast(origin - ivec2(4), {0, -1},
                                           &d_bot_right, &lhit_obj);
-  bool hit_bot_right = game::raycast(origin + ivec2(s.x / 2), {0, -1},
+  bool hit_bot_right = game::raycast(origin + ivec2(4), {0, -1},
                                            &d_bot_left, &rhit_obj);
   bool hit_top = game::raycast(origin, {0, 1}, &d_top, &hit_obj);
   bool hit_left = game::raycast(origin, {-1, 0}, &d_left, &hit_obj);
@@ -31,7 +29,7 @@ void player::update() {
 
   if(hit_bot_left && lhit_obj->get_name() == "Enemy"){
     game::destroy(lhit_obj);
-  
+    //lhit_obj->destroy();
   }
 
 

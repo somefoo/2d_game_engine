@@ -5,6 +5,7 @@ class tile : public game_object {
  public:
   void init(){
     set_sprite(game::load_sprite("sprites/floor_tile_1.png")); 
+    set_name("Tile");
   };
   void update(){};
 };

@@ -1,33 +1,69 @@
 #include "game_object.h"
+#include "instance_manager.h"
 #include <algorithm>
 #include <cassert>
 #include <iostream>
+#include <cstring>
 
-sprite game_object::_null_sprite{"sprites/debug/missing_sprite.png"};
+void game_object::set_name(std::string name) {
+  const int name_length = name.length();
+  char* const name_ptr = get_extra_state()->m_name;
+  if(name_length >= sizeof(extra_state::m_name)){
+    std::memcpy(name_ptr, name.data(), sizeof(extra_state::m_name) - 1);
+    name_ptr[sizeof(extra_state::m_name) - 1] = '\0';
+  }
+  else{
+    //TODO Does this include the ;\0 char?
+    std::memcpy(name_ptr, name.data(), name_length);
+    name_ptr[name_length] = '\0';
+  }
+}
 
-void game_object::set_name(std::string name) { _name = name; }
+void game_object::set_visible(bool visible) {
+  get_game_state()->m_visible = visible;
+}
 
-void game_object::set_visible(bool visible) { _visible = visible; }
+void game_object::set_depth(char depth) { 
+  get_game_state()->m_depth = depth;
+}
 
-void game_object::set_depth(short depth) { _depth = depth; }
+void game_object::set_position(ivec2 position) {
+  get_game_state()->m_position = position;
+}
 
-void game_object::set_position(ivec2 position) { _position = position; }
+void game_object::set_sprite(const unsigned short s) {
+  //TODO REMOVE AND IMPLEMENT
+ get_game_state()->m_sprite_id = s;
+}
 
-void game_object::set_sprite(sprite* s) { _sprite = s; }
+const std::string game_object::get_name() const {
+  return std::string(get_extra_state()->m_name);
+}
 
-const std::string game_object::get_name() const { return _name; }
+unsigned int game_object::get_id() const { 
+  //TODO replace with lifetime ID
+  return m_engine_state->m_positional_id;
+}
 
-unsigned int game_object::get_id() const { return _id; }
+short game_object::get_depth() const {
+  return get_game_state()->m_depth;
+}
 
-short game_object::get_depth() const { return _depth; }
+ivec2 game_object::get_position() const {
+  std::cout << m_engine_state->m_positional_id << std::endl;
+  return get_game_state()->m_position;
+}
 
-ivec2 game_object::get_position() const { return _position; }
+bool game_object::get_visible() const {
+  return get_game_state()->m_visible;
+}
 
-bool game_object::get_visible() const { return _visible; }
-
-sprite const* game_object::get_sprite() const { return _sprite; }
+unsigned short game_object::get_sprite() const { 
+  return get_game_state()->m_sprite_id;
+}
 
 bool game_object::hit_bounding_box(const ivec2 location) const {
+  /*
   ivec2 relative_position = location - _position;
   if (relative_position.x < 0) return false;
   if (relative_position.y < 0) return false;
@@ -44,11 +80,15 @@ bool game_object::hit(const ivec2 location) const {
     return true;
   }
   return false;
+  */
+  //TODO move somewhere else
+  return false;
 }
 
 // Only support down/up and left/right casting
 bool game_object::hit_ray_bounding_box(const ivec2 origin,
                                        const ivec2 direction, int* dist) const {
+  /*
   (void)direction;
   ivec2 relative_min = _position;
   ivec2 relative_max =
@@ -81,16 +121,44 @@ bool game_object::hit_ray_bounding_box(const ivec2 origin,
     }
   }
   return false;
+  */
+  //TODO Move somewhere else
+  return false;
 }
 
-void game_object::set_flip_x(bool flip) { _flip_x = flip; }
+void game_object::set_flip_x(bool flip) {
+  get_game_state()->m_flip_x = flip;
+}
 
-void game_object::set_flip_y(bool flip) { _flip_y = flip; }
+void game_object::set_flip_y(bool flip) {
+  get_game_state()->m_flip_y = flip;
+}
 
-bool game_object::get_flip_x(void) const { return _flip_x; }
+bool game_object::get_flip_x(void) const {
+  return get_game_state()->m_flip_x;
+}
 
-bool game_object::get_flip_y(void) const { return _flip_y; }
+bool game_object::get_flip_y(void) const {
+  return get_game_state()->m_flip_y;
+}
 
-void game_object::flip_x(void) { _flip_x = !_flip_x; }
+void game_object::flip_x(void) {
 
-void game_object::flip_y(void) { _flip_y = !_flip_y; }
+  get_game_state()->m_flip_x = !get_game_state()->m_flip_x;
+}
+
+void game_object::flip_y(void) {
+
+  get_game_state()->m_flip_y = !get_game_state()->m_flip_y;
+}
+
+void game_object::destroy(void) const{
+  instance_ge::destroy(m_engine_state);
+}
+
+game_state* game_object::get_game_state() const{
+  return instance_ge::get_game_state(m_engine_state);
+}
+extra_state* game_object::get_extra_state() const{
+  return instance_ge::get_extra_state(m_engine_state);
+}

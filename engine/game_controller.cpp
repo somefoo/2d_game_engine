@@ -13,10 +13,11 @@ void draw_magenta(ivec2 position) { debug_draw_ge::draw_magenta(position); }
 void draw_green(ivec2 position) { debug_draw_ge::draw_green(position); }
 
 //! @copydoc sprite_ge::load_sprite(std::string)
-sprite* load_sprite(std::string path) { return sprite_ge::load_sprite(path); }
+unsigned short load_sprite(std::string path) { return sprite_ge::load_sprite(path); }
 
 //! @copydoc sprite_ge::destroy(game_object)
-void destroy(game_object* o) { instance_ge::destroy(o); }
+//TODO not really needed anymore
+void destroy(game_object* o) { o->destroy(); }
 
 //! @copydoc key_event_ge::is_pressed(unsigned char)
 bool is_pressed(unsigned char key) { return key_event_ge::is_pressed(key); }

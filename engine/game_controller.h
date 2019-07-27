@@ -12,7 +12,7 @@ void draw_magenta(ivec2 position);
 void draw_green(ivec2 position); 
 
 //! @copydoc sprite_ge::load_sprite(std::string)
-sprite* load_sprite(std::string path);
+unsigned short load_sprite(std::string path);
 
 //! @copydoc instance_ge::instantiate()
 template <class T>

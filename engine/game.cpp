@@ -1,8 +1,12 @@
 #include "game.h"
+#include "game_object_accessor.h"
 
 void game::tic() {
   for (auto o : _objects) {
-    o->update();
+    //TODO this is expensive to test for every object
+    if(!game_object_accessor::get_engine_state(o)->m_dirty_deleted){
+      o->update();
+    }
   }
   _r.get_camera()->update();
   _r.clear();

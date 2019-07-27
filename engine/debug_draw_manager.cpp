@@ -1,13 +1,14 @@
 #include "debug_draw_manager.h"
+#include "sprite_manager.h"
 
 namespace debug_draw_ge {
 namespace {
 std::vector<game_object *> *_debug_objects;
-sprite _magenta("sprites/debug/magenta_dot.png");
-sprite _green("sprites/debug/green_dot.png");
+unsigned short m_magenta = sprite_ge::load_sprite("sprites/debug/magenta_dot.png");
+unsigned short m_green = sprite_ge::load_sprite("sprites/debug/green_dot.png");
 class tile : public game_object {
  public:
-  tile(sprite *s){set_sprite(s);}
+  tile(unsigned char s){set_sprite(s);}
   void init(void){};
   void update(){};
 };
@@ -19,13 +20,13 @@ void set_debug_object_vector(std::vector<game_object *> *debug_objects) {
 }
 
 void draw_magenta(ivec2 position) {
-  tile *obj = new tile(&_magenta);
+  tile *obj = new tile(m_magenta);
   obj->set_position(position);
   _debug_objects->emplace_back(obj);
 }
 
 void draw_green(ivec2 position) {
-  tile *obj = new tile(&_green);
+  tile *obj = new tile(m_green);
   obj->set_position(position);
   _debug_objects->emplace_back(obj);
 }
