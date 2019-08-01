@@ -26,10 +26,12 @@ add_executable(my_game main.cpp ${my_game_engine_SRC})
 
 find_package(OpenMP REQUIRED)
 find_package(SDL2 REQUIRED)
+find_package(Threads REQUIRED)
 #find_package(PNG REQUIRED)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
 
-target_link_libraries(my_game PRIVATE OpenMP::OpenMP_CXX ${OPENGL_LIBRARY} ${GLUT_LIBRARY} ${GLEW_LIBRARY} ${SDL2_LIBRARIES})
+#target_link_libraries(my_game PRIVATE OpenMP::OpenMP_CXX ${OPENGL_LIBRARY} ${GLUT_LIBRARY} ${GLEW_LIBRARY} ${SDL2_LIBRARIES})
+target_link_libraries(my_game PRIVATE ${CMAKE_THREAD_LIBS_INIT} ${OpenMP_CXX_LIBRARIES} ${OPENGL_LIBRARY} ${GLUT_LIBRARY} ${GLEW_LIBRARY} ${SDL2_LIBRARIES})
