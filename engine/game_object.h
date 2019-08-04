@@ -58,11 +58,9 @@ struct engine_state{
   //The id is not fixed, but can change during runtime
   engine_state(){
     m_lifetime_id = 0;
-    m_positional_id = 0;
     m_dirty_deleted = 0;
   }
   unsigned int m_lifetime_id;
-  unsigned short m_positional_id;
   unsigned short m_dirty_deleted:1;
 };
 
@@ -168,7 +166,7 @@ class game_object {
   //We need a way to allow access to the object
   //without giving sub-classes access
   friend class game_object_accessor;
-  engine_state* m_engine_state;
+  unsigned short m_positional_id;
 
   void set_engine_state(engine_state *const es);
   engine_state* get_engine_state(void) const;

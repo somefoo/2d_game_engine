@@ -2,23 +2,26 @@
 #include "game_object_accessor.h"
 #include "logger.h"
 #include <algorithm>
-
 namespace instance_ge {
 namespace {
 std::vector<unsigned short> m_deleted_ids;
 std::vector<game_object *> *m_objects;
-std::vector<game_state> m_game_states;
-std::vector<engine_state> m_engine_states;
-std::vector<extra_state> m_extra_states;
+std::vector<game_state> m_game_states(100);
+std::vector<engine_state> m_engine_states(100);
+std::vector<extra_state> m_extra_states(100);
 }  // namespace
-game_state* get_game_state(const engine_state *const es){
+game_state* get_game_state(const short positional_id){
   //std::cout << "Glob id accessed is: " << es->m_lifetime_id << std::endl;
-  game_state* r =  &(m_game_states[es->m_positional_id]);
+  game_state* r =  &(m_game_states[positional_id]);
   return r;
 }
 
-extra_state* get_extra_state(const engine_state *const es){
-  return &(m_extra_states[es->m_positional_id]);
+extra_state* get_extra_state(const short positional_id){
+  return &(m_extra_states[positional_id]);
+}
+
+engine_state* get_engine_state(const short positional_id){
+  return &(m_engine_states[positional_id]);
 }
 void cleanup(){
   //Ensure we delete from back up front so we do not replace
@@ -26,11 +29,11 @@ void cleanup(){
   std::sort(m_deleted_ids.begin(), m_deleted_ids.end(), std::greater<unsigned short>()); 
   for(const unsigned short o : m_deleted_ids){
     (*m_objects)[o] = m_objects->back();
+    game_object_accessor::set_positional_id((*m_objects)[o], o);
     m_objects->pop_back();
   }
   for(const unsigned short o : m_deleted_ids){
     m_engine_states[o] = m_engine_states.back();
-    m_engine_states[o].m_positional_id = o;
     m_engine_states.pop_back();
   }
   for(const unsigned short o : m_deleted_ids){
@@ -44,11 +47,10 @@ void cleanup(){
   m_deleted_ids.clear();
 }
 
-void destroy(engine_state* state) {
+void destroy(const short positional_id) {
   //_deleted
-  const unsigned short pos_id = state->m_positional_id;
-  m_deleted_ids.push_back(pos_id);
-  state->m_dirty_deleted=1;
+  m_deleted_ids.push_back(positional_id);
+  m_engine_states[positional_id].m_dirty_deleted=1;
 }
 
 void set_object_vector(std::vector<game_object *> *objects) {
@@ -62,12 +64,10 @@ void add(game_object *o) {
   m_game_states.emplace_back();
   m_extra_states.emplace_back();
   
-  m_engine_states.back().m_positional_id = last;
   m_engine_states.back().m_lifetime_id = life_time_id_counter++; 
   m_objects->emplace_back(o);
 
-  logger::info("Added object with id: ", m_engine_states.back().m_positional_id );
-  game_object_accessor::set_engine_state(o, &m_engine_states.back());
+  game_object_accessor::set_positional_id(o, last);
   o->init();
 }
 

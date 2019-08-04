@@ -42,7 +42,8 @@ const std::string game_object::get_name() const {
 
 unsigned int game_object::get_id() const { 
   //TODO replace with lifetime ID
-  return m_engine_state->m_positional_id;
+  //return get_engine_state()->m_lifetime_id;
+  return m_positional_id;
 }
 
 short game_object::get_depth() const {
@@ -152,20 +153,15 @@ void game_object::flip_y(void) {
 }
 
 void game_object::destroy(void) const{
-  instance_ge::destroy(m_engine_state);
+  instance_ge::destroy(m_positional_id);
 }
 
 game_state* game_object::get_game_state() const{
-  return instance_ge::get_game_state(m_engine_state);
+  return instance_ge::get_game_state(m_positional_id);
 }
 extra_state* game_object::get_extra_state() const{
-  return instance_ge::get_extra_state(m_engine_state);
+  return instance_ge::get_extra_state(m_positional_id);
 }
-
-void game_object::set_engine_state(engine_state *const es){
-  m_engine_state = es;
-}
-
 engine_state* game_object::get_engine_state(void) const{
-  return m_engine_state;
+  return instance_ge::get_engine_state(m_positional_id);
 }
