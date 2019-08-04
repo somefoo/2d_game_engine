@@ -5,11 +5,9 @@
 void player::init(void){
   set_sprite(game::load_sprite("sprites/sample3.png"));
   set_name("Player");
-  std::cout << "Player thinks his id is:" << get_id() << std::endl;
 }
 
 void player::update() {
-  std::cout << "Player thinks his rutime id is:" << get_id() << std::endl;
 //  debug_draw_ge::clear();
   //ivec2 s(get_sprite()->get_width(), get_sprite()->get_height());
   ivec2 origin = get_position() + ivec2(4, 4);

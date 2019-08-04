@@ -7,6 +7,8 @@
 #include "../engine/game_controller.h"
 
 void scene::init(void){
+  set_name("Scene");
+  set_visible(false);
   //Application entry point
   //Contruct game here!
 /*
@@ -21,18 +23,20 @@ void scene::init(void){
   tl = game::instantiate<tile>();
   tl->set_position({256 -32 ,32});
   tl = game::instantiate<tile>();
-
+*/
   
-  tile_large* t = game::instantiate<tile_large>();
-  t->set_position({0,0});
-  player* pl = game::instantiate<player>();
-  pl->set_position({40,90});
+  //tile_large* t = game::instantiate<tile_large>();
+  //t->set_position({0,0});
+  //t = game::instantiate<tile_large>();
   enemy* e = game::instantiate<enemy>();
   e->set_position({50,32});
-  */
+  e = game::instantiate<enemy>();
+  e->set_position({0,32});
+  //t = game::instantiate<tile_large>();
+//  player* pl = game::instantiate<player>();
+//  pl->set_position({40,90});
+  
 
-  tile* tl = game::instantiate<tile>();
-  tl->set_position({0,100});
   //tile_large* t = game::instantiate<tile_large>();
   //t->set_position({0,0});
 }

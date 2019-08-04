@@ -9,6 +9,7 @@
 #include "renderer.h"
 #include "sprite_manager.h"
 #include "../src/scene.h"
+#include "logger.h"
 
 class game {
  public:
@@ -18,6 +19,10 @@ class game {
     raycast_ge::set_global_object_vector(&_objects);
     debug_draw_ge::set_debug_object_vector(&_debug_objects);
     instance_ge::instantiate<scene>();
+
+    for(auto g : _objects){
+      logger::warning(g ," starting IDs: ", g->get_id());
+    }
   }
   ~game() {
     // We are owner of all objects, delete them

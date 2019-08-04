@@ -169,6 +169,9 @@ class game_object {
   //without giving sub-classes access
   friend class game_object_accessor;
   engine_state* m_engine_state;
+
+  void set_engine_state(engine_state *const es);
+  engine_state* get_engine_state(void) const;
   game_state* get_game_state() const;
   extra_state* get_extra_state() const;
 };

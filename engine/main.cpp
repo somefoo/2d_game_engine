@@ -82,6 +82,7 @@ void end_update(void) {
 }
 
 int main(int argc, char **argv) {
+  //TODO rename raytracer
   int threadC =
       pthread_create(&raytracerThread, NULL, start_update, (void *)&run_state);
   if (threadC) {

@@ -1,5 +1,5 @@
 #include "sprite_manager.h"
-#include <iostream>
+#include "logger.h"
 namespace sprite_ge {
 namespace {
 std::vector<sprite*>* m_sprites;

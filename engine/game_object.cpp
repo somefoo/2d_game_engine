@@ -50,7 +50,6 @@ short game_object::get_depth() const {
 }
 
 ivec2 game_object::get_position() const {
-  std::cout << m_engine_state->m_positional_id << std::endl;
   return get_game_state()->m_position;
 }
 
@@ -161,4 +160,12 @@ game_state* game_object::get_game_state() const{
 }
 extra_state* game_object::get_extra_state() const{
   return instance_ge::get_extra_state(m_engine_state);
+}
+
+void game_object::set_engine_state(engine_state *const es){
+  m_engine_state = es;
+}
+
+engine_state* game_object::get_engine_state(void) const{
+  return m_engine_state;
 }

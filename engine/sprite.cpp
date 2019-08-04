@@ -31,12 +31,13 @@ unsigned char fit_color(const unsigned char r, const unsigned char g,
   assert(sr < 8 && sg < 8 && sb < 4);
   return (sr << 5) + (sg << 2) + (sb);
 }
+//TODO move this?
 void sprite::load_png(std::string path) {
   int width, height, n;
   stbi_info(path.data(), &width, &height, &n);
-  std::cout << "Loading image"
-            << " w: " << width << " h: " << height << " depth: " << n
-            << std::endl;
+//  std::cout << "Loading image"
+//            << " w: " << width << " h: " << height << " depth: " << n
+//            << std::endl;
   unsigned char *data = stbi_load(path.data(), &width, &height, &n, 0);
   _data.reserve(width * height);
 
