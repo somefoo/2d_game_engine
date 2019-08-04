@@ -6,7 +6,7 @@ endif()
 set (CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -Wextra -Werror -Wno-unused-private-field")
 #set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -Wextra")
-set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall -Wextra")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -Wall -Wextra -fsanitize=address")
 project(my_game VERSION 0.1.0)
 
 include(CTest)

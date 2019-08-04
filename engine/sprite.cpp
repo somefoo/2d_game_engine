@@ -52,5 +52,5 @@ void sprite::load_png(std::string path) {
 
   _width = width;
   _height = height;
-  delete[] data;
+  std_image_free(data);
 }
