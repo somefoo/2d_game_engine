@@ -2,12 +2,13 @@
 #include "game_object_accessor.h"
 
 void game::tic() {
-  //TODO remove
+
   for(auto g : _objects){
     static int counter = 0;
     if(counter++ < 3)
-    logger::warning(g, " tic IDs:", g->get_id());
-  } 
+    logger::error(g, " ", g->get_name(), " at position", " (", g->get_position().x,
+        "," , g->get_position().y, ")", " starting IDs: ", g->get_id());
+  }
   for (auto o : _objects) {
     //TODO this is expensive to test for every object
     const short positional_id = game_object_accessor::get_positional_id(o);

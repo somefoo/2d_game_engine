@@ -7,6 +7,7 @@
 #include "debug_draw_manager.h"
 #include "sprite_manager.h"
 #include "sprite.h"
+#include "logger.h"
 //#define NDEBUG
 #include <assert.h>
 

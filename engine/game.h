@@ -21,7 +21,8 @@ class game {
     instance_ge::instantiate<scene>();
 
     for(auto g : _objects){
-      logger::warning(g ," starting IDs: ", g->get_id());
+      logger::warning(g, " ", g->get_name(), " at position", " (", g->get_position().x,
+          "," , g->get_position().y, ")", " starting IDs: ", g->get_id());
     }
   }
   ~game() {

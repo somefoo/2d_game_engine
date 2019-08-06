@@ -2,14 +2,30 @@
 #include "game_object_accessor.h"
 #include "logger.h"
 #include <algorithm>
+
+struct info{
+  int val;
+  info(){
+    std::cout << "BEING CONST:" << &val << std::endl;
+  }
+  ~info(){
+    std::cout << "BEING DEST:" << &val << std::endl;
+  }
+};
+
 namespace instance_ge {
 namespace {
 std::vector<unsigned short> m_deleted_ids;
 std::vector<game_object *> *m_objects;
-std::vector<game_state> m_game_states(100);
-std::vector<engine_state> m_engine_states(100);
-std::vector<extra_state> m_extra_states(100);
+std::vector<game_state> m_game_states;
+std::vector<engine_state> m_engine_states;
+std::vector<extra_state> m_extra_states;
 }  // namespace
+
+namespace data {
+static std::vector<info> m_info_states(3);
+}
+
 game_state* get_game_state(const short positional_id){
   //std::cout << "Glob id accessed is: " << es->m_lifetime_id << std::endl;
   game_state* r =  &(m_game_states[positional_id]);
@@ -58,6 +74,7 @@ void set_object_vector(std::vector<game_object *> *objects) {
 }
 
 void add(game_object *o) {
+  data::m_info_states.emplace_back();
   static unsigned int life_time_id_counter = 0;
   const unsigned short last = m_objects->size();
   m_engine_states.emplace_back();  
