@@ -91,14 +91,14 @@ void renderer::draw_object(const game_object *o) {
     }
 }
 
-void renderer::draw_object(const state& o){
+void renderer::draw_object(const game_state& o){
   const ivec2 c = _camera.get_position();
-  const ivec2 p = o.m_position();
+  const ivec2 p = o.m_position;
   const sprite *s = sprite_ge::get_loaded_sprite(o.m_sprite_id);
   const int h = s->get_height();
   const int w = s->get_width();
-  const bool flip_x = o->get_flip_x();
-  const bool flip_y = o->get_flip_y();
+  const bool flip_x = o.m_flip_x;
+  const bool flip_y = o.m_flip_y;
 
 
   //    @TODO what about black? This is ugly xD

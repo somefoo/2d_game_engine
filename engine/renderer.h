@@ -26,7 +26,7 @@ class renderer {
 
   // Draw a single object onto framebuffer
   // @param o state of object that will be drawn
-  void draw_object(const state& o);
+  void draw_object(const game_state& o);
 
   //@return pointer to framebuffer
   unsigned char const* get_framebuffer(void) const;
