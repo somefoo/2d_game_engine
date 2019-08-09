@@ -16,9 +16,17 @@ class renderer {
   //@param objects pointer to object list that will be drawn
   void render(std::vector<game_object*> const* objects);
 
+  // Draw objects onto framebuffer
+  // @param states the game_state of the object that is to be drawn
+  void render(const std::vector<game_state>& states);
+
   // Draw single object onto framebuffer
   //@param o object that will be drawn
   void draw_object(const game_object* o);
+
+  // Draw a single object onto framebuffer
+  // @param o state of object that will be drawn
+  void draw_object(const state& o);
 
   //@return pointer to framebuffer
   unsigned char const* get_framebuffer(void) const;

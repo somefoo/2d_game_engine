@@ -19,6 +19,7 @@ class game {
     raycast_ge::set_global_object_vector(&_objects);
     debug_draw_ge::set_debug_object_vector(&_debug_objects);
     instance_ge::instantiate<scene>();
+    m_instance_manager.instantiate<scene>();
 
     for(auto g : _objects){
       logger::warning(g, " ", g->get_name(), " at position", " (", g->get_position().x,
@@ -45,6 +46,7 @@ class game {
   unsigned char const* get_framebuffer() const;
 
  private:
+  instance_manager m_instance_manager;
   renderer _r;
   std::vector<game_object*> _debug_objects;
   std::vector<game_object*> _objects;
