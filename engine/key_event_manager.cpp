@@ -1,5 +1,16 @@
 #include "key_event_manager.h"
 #include <bitset>
+void key_event_manager::set_key_press(unsigned char key) {
+  m_is_pressed_mask.set(key);
+}
+
+void key_event_manager::reset_key_press(unsigned char key) {
+  m_is_pressed_mask.reset(key);
+}
+
+bool key_event_manager::is_pressed(unsigned char key) {
+  return m_is_pressed_mask.test(key);
+}
 
 namespace key_event_ge {
 namespace {

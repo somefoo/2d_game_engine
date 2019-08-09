@@ -47,6 +47,9 @@ class game {
 
  private:
   instance_manager m_instance_manager;
+  sprite_manager m_sprite_manager;
+  raycast_manager m_raycast_manager;
+
   renderer _r;
   std::vector<game_object*> _debug_objects;
   std::vector<game_object*> _objects;
