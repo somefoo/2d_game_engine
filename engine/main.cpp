@@ -7,8 +7,7 @@
 #include <string>
 #include <thread>
 
-#include "game.h"
-#include "key_event_manager.h"
+#include "game_instance.h"
 
 #define M_PI 3.14159265358979323846
 #define WIDTH 320
@@ -26,19 +25,21 @@ struct run_info {
 pthread_t raytracerThread;
 
 int frame = 0, timebase = 0;
-game g(WIDTH, HEIGHT);
+game_instance g(WIDTH, HEIGHT);
 
 void processNormalKeys(unsigned int key) {
   if (key > 0x7F) return;
   if (key == 27) {
     exit(0);
   }
-  key_event_ge::set_key_press(char(key));
+  //key_event_ge::set_key_press(char(key));
+  g.get_key_event_manager().set_key_press(char(key));
 }
 
 void processNormalKeysUp(unsigned int key) {
   if (key > 0x7F) return;
-  key_event_ge::reset_key_press(char(key));
+  //key_event_ge::reset_key_press(char(key));
+  g.get_key_event_manager().reset_key_press(char(key));
 }
 
 void *start_update(void *run_state) {

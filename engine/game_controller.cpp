@@ -6,6 +6,7 @@
 #include "sprite_manager.h"
 
 // Restricted view on the functions of the engine
+//TODO dangerous naming!! Same game class
 namespace game {
 //! @copydoc debug_draw_ge::draw_magenta(ivec2)
 void draw_magenta(ivec2 position) { debug_draw_ge::draw_magenta(position); }
