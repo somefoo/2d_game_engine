@@ -1,6 +1,6 @@
 #include "debug_draw_manager.h"
 #include "sprite_manager.h"
-
+/*
 namespace debug_draw_ge {
 namespace {
 std::vector<game_object *> *_debug_objects;
@@ -39,3 +39,4 @@ void clear() {
 }
 
 }  // namespace debug_draw_ge
+*/

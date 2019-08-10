@@ -8,6 +8,7 @@
 #include <thread>
 
 #include "game_instance.h"
+#include "game_controller.h"
 
 #define M_PI 3.14159265358979323846
 #define WIDTH 320
@@ -83,6 +84,11 @@ void end_update(void) {
 }
 
 int main(int argc, char **argv) {
+  //Set g to the current game instance
+  game::set_game_instance(&g);
+  //Initilise the game - call after set_game_instance
+  g.init();
+
   //TODO rename raytracer
   int threadC =
       pthread_create(&raytracerThread, NULL, start_update, (void *)&run_state);
@@ -105,7 +111,6 @@ int main(int argc, char **argv) {
                         SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
 
   SDL_RendererFlip flip = SDL_FLIP_VERTICAL;
-
   SDL_Event event;
 
   while (!run_state.exited) {

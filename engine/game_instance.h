@@ -15,34 +15,10 @@
 class game_instance {
  public:
   game_instance(int width, int height) : m_renderer(width, height) {
-    sprite_ge::set_sprite_vector(&_sprites);
-    instance_ge::set_object_vector(&_objects);
-    raycast_ge::set_global_object_vector(&_objects);
-    debug_draw_ge::set_debug_object_vector(&_debug_objects);
-    instance_ge::instantiate<scene>();
-    m_instance_manager.instantiate<scene>();
-
-    for(auto g : _objects){
-      logger::warning(g, " ", g->get_name(), " at position", " (", g->get_position().x,
-          "," , g->get_position().y, ")", " starting IDs: ", g->get_id());
-    }
-  }
-  ~game_instance() {
-    // We are owner of all objects, delete them
-    for (auto v : _objects) {
-      delete v;
-    }
-    for (auto v : _debug_objects) {
-      delete v;
-    }
-    for (auto v : _sprites) {
-      delete v;
-    }
-    _objects.clear();
-    _debug_objects.clear();
-    _sprites.clear();
   }
 
+  //Initilises the game instance, should be called after the game_controller::set_game_instance(*)
+  void init();
   //Update the game
   void tic();
   //@return pointer to frambuffer
@@ -63,7 +39,4 @@ class game_instance {
   key_event_manager m_key_event_manager{};
 
   renderer m_renderer;
-  std::vector<game_object*> _debug_objects;
-  std::vector<game_object*> _objects;
-  std::vector<sprite*> _sprites;
 };

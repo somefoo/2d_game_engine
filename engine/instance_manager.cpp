@@ -16,8 +16,12 @@ engine_state* instance_manager::get_engine_state(const short positional_id){
   return &(m_engine_states[positional_id]);
 }
 
-const std::vector<game_state>& instance_manager::get_game_state_vector() const{
+const std::vector<game_state>& instance_manager::get_game_state_vector(void) const{
   return m_game_states;
+}
+
+const std::vector<game_object*>& instance_manager::get_game_object_vector(void) const{
+  return m_objects;
 }
 
 void instance_manager::cleanup(){

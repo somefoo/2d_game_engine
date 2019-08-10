@@ -1,4 +1,5 @@
 #include "game_controller.h"
+#include <cassert>
 #include "debug_draw_manager.h"
 #include "instance_manager.h"
 #include "key_event_manager.h"
@@ -6,27 +7,41 @@
 #include "sprite_manager.h"
 
 // Restricted view on the functions of the engine
-//TODO dangerous naming!! Same game class
 namespace game {
-//! @copydoc debug_draw_ge::draw_magenta(ivec2)
-void draw_magenta(ivec2 position) { debug_draw_ge::draw_magenta(position); }
-//! @copydoc debug_draw_ge::draw_green(ivec2)
-void draw_green(ivec2 position) { debug_draw_ge::draw_green(position); }
+namespace {
+game_instance* m_current_instance = nullptr;
+}
 
-//! @copydoc sprite_ge::load_sprite(std::string)
-unsigned short load_sprite(std::string path) { return sprite_ge::load_sprite(path); }
+void set_game_instance(game_instance* g) { m_current_instance = g; }
+void draw_magenta(ivec2 position) {
+  assert(m_current_instance); 
+  // debug_draw_ge::draw_magenta(position);
+}
+void draw_green(ivec2 position) {
+  assert(m_current_instance); 
+  // debug_draw_ge::draw_green(position);
+}
 
-//! @copydoc sprite_ge::destroy(game_object)
-//TODO not really needed anymore
-void destroy(game_object* o) { o->destroy(); }
+unsigned short load_sprite(std::string path) {
+  assert(m_current_instance);
+  return m_current_instance->get_sprite_manager().load_sprite(path);
+}
 
-//! @copydoc key_event_ge::is_pressed(unsigned char)
-bool is_pressed(unsigned char key) { return key_event_ge::is_pressed(key); }
+// TODO not really needed anymore
+void destroy(game_object* o) {
+  assert(m_current_instance);
+  o->destroy();
+}
 
-//! @copydoc raycast_ge::raycast(const ivec2,const ivec2,int*,game_object**)
+bool is_pressed(unsigned char key) {
+  assert(m_current_instance);
+  return m_current_instance->get_key_event_manager().is_pressed(key);
+}
+
 bool raycast(const ivec2 origin, const ivec2 direction, int* dist,
              game_object** object) {
-  return raycast_ge::raycast(origin, direction, dist, object);
+  assert(m_current_instance);
+  return m_current_instance->get_raycast_manager().raycast(origin, direction, dist, object);
 }
 
 }  // namespace game

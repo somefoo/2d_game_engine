@@ -2,10 +2,17 @@
 #include "game_object.h"
 //Ugly, but I need the include because of template
 #include "instance_manager.h"
+#include "game_instance.h"
 #include <string>
 
 // Restricted view on the functions of the engine
 namespace game {
+
+// Sets the current game instance to g
+// @param g pointer to game instance
+void set_game_instance(game_instance* g);
+
+//TODO Remove all the copydocs
 //! @copydoc debug_draw_ge::draw_magenta(ivec2)
 void draw_magenta(ivec2 position); 
 //! @copydoc debug_draw_ge::draw_green(ivec2)
@@ -16,6 +23,7 @@ unsigned short load_sprite(std::string path);
 
 //! @copydoc instance_ge::instantiate()
 template <class T>
+  //TODO FIX
 T* instantiate(){
   return instance_ge::instantiate<T>();
 }
