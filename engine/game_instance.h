@@ -27,7 +27,7 @@ class game_instance {
           "," , g->get_position().y, ")", " starting IDs: ", g->get_id());
     }
   }
-  ~game() {
+  ~game_instance() {
     // We are owner of all objects, delete them
     for (auto v : _objects) {
       delete v;
