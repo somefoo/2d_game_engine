@@ -7,18 +7,18 @@ class instance_manager{
 public:
 //Returns the game_state of the object 
 //@param positional_id the positional id of the object
-//@return a pointer to the game_state of the object
-game_state* get_game_state(const short positional_id);
+//@return a reference to the game_state of the object
+game_state& get_game_state(const unsigned short positional_id);
 
 //Returns the extra_state of the object
 //@param positional_id the positional id of the object
-//@return a pointer to the extra_state of the object
-extra_state* get_extra_state(const short positional_id);
+//@return a reference to the extra_state of the object
+extra_state& get_extra_state(const unsigned short positional_id);
 
 //Returns the engine_state of the object
 //@param positional_id the positional id of the object
-//@return a pointer to the engine_state of the object
-engine_state* get_engine_state(const short positional_id);
+//@return a reference to the engine_state of the object
+engine_state& get_engine_state(const unsigned short positional_id);
 
 
 //Returns reference to const game_state vector

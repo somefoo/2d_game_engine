@@ -169,7 +169,7 @@ class game_object {
   unsigned short m_positional_id;
 
   void set_engine_state(engine_state *const es);
-  engine_state* get_engine_state(void) const;
-  game_state* get_game_state() const;
-  extra_state* get_extra_state() const;
+  engine_state& get_engine_state(void) const;
+  game_state& get_game_state() const;
+  extra_state& get_extra_state() const;
 };

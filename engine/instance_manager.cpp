@@ -3,17 +3,17 @@
 #include "logger.h"
 #include <algorithm>
 
-game_state* instance_manager::get_game_state(const short positional_id){
+game_state& instance_manager::get_game_state(const unsigned short positional_id){
   //std::cout << "Glob id accessed is: " << es->m_lifetime_id << std::endl;
-  return &(m_game_states[positional_id]);
+  return m_game_states[positional_id];
 }
 
-extra_state* instance_manager::get_extra_state(const short positional_id){
-  return &(m_extra_states[positional_id]);
+extra_state& instance_manager::get_extra_state(const unsigned short positional_id){
+  return m_extra_states[positional_id];
 }
 
-engine_state* instance_manager::get_engine_state(const short positional_id){
-  return &(m_engine_states[positional_id]);
+engine_state& instance_manager::get_engine_state(const unsigned short positional_id){
+  return m_engine_states[positional_id];
 }
 
 const std::vector<game_state>& instance_manager::get_game_state_vector(void) const{

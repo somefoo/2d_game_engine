@@ -26,7 +26,8 @@ void player::update() {
   ivec2 pos = get_position();
 
   if(hit_bot_left && lhit_obj->get_name() == "Enemy"){
-    game::destroy(lhit_obj);
+    //game::destroy(lhit_obj);
+    std::cout << "Hit enemy!!" << std::endl;
     //lhit_obj->destroy();
   }
 

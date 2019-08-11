@@ -16,7 +16,7 @@ void game_instance::tic() {
   for (auto o : m_instance_manager.get_game_object_vector()) {
     // TODO this is expensive to test for every object
     const short positional_id = game_object_accessor::get_positional_id(o);
-    if (!m_instance_manager.get_engine_state(positional_id)->m_dirty_deleted) {
+    if (!m_instance_manager.get_engine_state(positional_id).m_dirty_deleted) {
       o->update();
     }
   }

@@ -5,7 +5,7 @@
 #include <iostream>
 #include <random>
 #include "debug_draw_manager.h"
-#include "sprite_manager.h"
+#include "game_controller.h"
 #include "sprite.h"
 #include "logger.h"
 //#define NDEBUG
@@ -47,9 +47,11 @@ void renderer::render(const std::vector<game_state>& states){
 
 //TODO REMOVE THIS FUNCTION
 void renderer::draw_object(const game_object *o) {
+  logger::error("not implemented draw function");
+  /*
   const ivec2 c = _camera.get_position();
   const ivec2 p = o->get_position();
-  const sprite *s = sprite_ge::get_loaded_sprite(o->get_sprite());
+  const sprite *s = game::m_current_instance->get_sprite_manager().get_loaded_sprite(o.m_sprite_id);
   const int h = s->get_height();
   const int w = s->get_width();
   const bool flip_x = o->get_flip_x();
@@ -89,12 +91,13 @@ void renderer::draw_object(const game_object *o) {
       }
       yy++;
     }
+    */
 }
 
 void renderer::draw_object(const game_state& o){
   const ivec2 c = _camera.get_position();
   const ivec2 p = o.m_position;
-  const sprite *s = sprite_ge::get_loaded_sprite(o.m_sprite_id);
+  const sprite *s = game::m_current_instance->get_sprite_manager().get_loaded_sprite(o.m_sprite_id);
   const int h = s->get_height();
   const int w = s->get_width();
   const bool flip_x = o.m_flip_x;

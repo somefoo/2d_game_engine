@@ -8,9 +8,8 @@
 
 // Restricted view on the functions of the engine
 namespace game {
-namespace {
+
 game_instance* m_current_instance = nullptr;
-}
 
 void set_game_instance(game_instance* g) { m_current_instance = g; }
 void draw_magenta(ivec2 position) {
@@ -25,12 +24,6 @@ void draw_green(ivec2 position) {
 unsigned short load_sprite(std::string path) {
   assert(m_current_instance);
   return m_current_instance->get_sprite_manager().load_sprite(path);
-}
-
-// TODO not really needed anymore
-void destroy(game_object* o) {
-  assert(m_current_instance);
-  o->destroy();
 }
 
 bool is_pressed(unsigned char key) {
