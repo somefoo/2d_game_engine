@@ -4,7 +4,6 @@
 #include <algorithm>
 
 game_state& instance_manager::get_game_state(const unsigned short positional_id){
-  //std::cout << "Glob id accessed is: " << es->m_lifetime_id << std::endl;
   return m_game_states[positional_id];
 }
 

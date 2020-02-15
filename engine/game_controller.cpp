@@ -8,33 +8,34 @@
 
 // Restricted view on the functions of the engine
 namespace game {
-
-game_instance* m_current_instance = nullptr;
+namespace{
+  game_instance* m_current_instance = nullptr;
+}
 
 void set_game_instance(game_instance* g) { m_current_instance = g; }
+game_instance* get_game_instance(void){
+  assert(m_current_instance); //game instance is initilised?
+  return m_current_instance;
+}
+
 void draw_magenta(ivec2 position) {
-  assert(m_current_instance); 
   // debug_draw_ge::draw_magenta(position);
 }
 void draw_green(ivec2 position) {
-  assert(m_current_instance); 
   // debug_draw_ge::draw_green(position);
 }
 
 unsigned short load_sprite(std::string path) {
-  assert(m_current_instance);
-  return m_current_instance->get_sprite_manager().load_sprite(path);
+  return get_game_instance()->get_sprite_manager().load_sprite(path);
 }
 
 bool is_pressed(unsigned char key) {
-  assert(m_current_instance);
-  return m_current_instance->get_key_event_manager().is_pressed(key);
+  return get_game_instance()->get_key_event_manager().is_pressed(key);
 }
 
-bool raycast(const ivec2 origin, const ivec2 direction, int* dist,
-             game_object** object) {
+bool raycast(const ivec2 origin, const ivec2 direction, int* dist) {
   assert(m_current_instance);
-  return m_current_instance->get_raycast_manager().raycast(origin, direction, dist, object);
+  return get_game_instance()->get_raycast_manager().raycast(origin, direction, dist);
 }
 
 }  // namespace game

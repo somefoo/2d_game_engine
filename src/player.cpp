@@ -12,25 +12,15 @@ void player::update() {
   //ivec2 s(get_sprite()->get_width(), get_sprite()->get_height());
   ivec2 origin = get_position() + ivec2(4, 4);
   ivec2 direction = {0, -1};
-  game_object* hit_obj;
-  game_object* lhit_obj;
-  game_object* rhit_obj;
   int d_bot_left, d_bot_right, d_left, d_right, d_top;
   bool hit_bot_left = game::raycast(origin - ivec2(4), {0, -1},
-                                          &d_bot_right, &lhit_obj);
+                                          &d_bot_right);
   bool hit_bot_right = game::raycast(origin + ivec2(4), {0, -1},
-                                           &d_bot_left, &rhit_obj);
-  bool hit_top = game::raycast(origin, {0, 1}, &d_top, &hit_obj);
-  bool hit_left = game::raycast(origin, {-1, 0}, &d_left, &hit_obj);
-  bool hit_right = game::raycast(origin, {1, 0}, &d_right, &hit_obj);
+                                           &d_bot_left);
+  bool hit_top = game::raycast(origin, {0, 1}, &d_top);
+  bool hit_left = game::raycast(origin, {-1, 0}, &d_left);
+  bool hit_right = game::raycast(origin, {1, 0}, &d_right);
   ivec2 pos = get_position();
-
-  if(hit_bot_left && lhit_obj->get_name() == "Enemy"){
-    //game::destroy(lhit_obj);
-    std::cout << "Hit enemy!!" << std::endl;
-    //lhit_obj->destroy();
-  }
-
 
   if ((hit_bot_left || hit_bot_right) &&
       (d_bot_left <= 4 || d_bot_right <= 4)) {

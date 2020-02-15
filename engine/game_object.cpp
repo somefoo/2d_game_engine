@@ -63,70 +63,6 @@ unsigned short game_object::get_sprite() const {
   return get_game_state().m_sprite_id;
 }
 
-bool game_object::hit_bounding_box(const ivec2 location) const {
-  /*
-  ivec2 relative_position = location - _position;
-  if (relative_position.x < 0) return false;
-  if (relative_position.y < 0) return false;
-  if (relative_position.x >= _sprite->get_width()) return false;
-  if (relative_position.y >= _sprite->get_height()) return false;
-  return true;
-}
-bool game_object::hit(const ivec2 location) const {
-  if (!hit_bounding_box(location)) return false;
-  ivec2 relative_position = location - _position;
-
-  if (_sprite->get_pixel(relative_position.x, relative_position.y) !=
-      TRANSPARENT) {
-    return true;
-  }
-  return false;
-  */
-  //TODO move somewhere else
-  return false;
-}
-
-// Only support down/up and left/right casting
-bool game_object::hit_ray_bounding_box(const ivec2 origin,
-                                       const ivec2 direction, int* dist) const {
-  /*
-  (void)direction;
-  ivec2 relative_min = _position;
-  ivec2 relative_max =
-      _position + ivec2(_sprite->get_width(), _sprite->get_height());
-
-  assert(direction.x * direction.y == 0);
-
-  if (direction.y < 0) {
-    // Downcast
-    if (relative_min.x <= origin.x && relative_max.x >= origin.x) {
-      (*dist) = origin.y - relative_max.y;
-      return (*dist) > 0;
-    }
-  } else if (direction.y <= 0) {
-    // Upcast
-    if (relative_min.x < origin.x && relative_max.x > origin.x) {
-      (*dist) = relative_min.y - origin.y;
-      return (*dist) > 0;
-    }
-  } else if (direction.x <= 0) {
-    // Leftcast
-    if (relative_min.y < origin.y && relative_max.y > origin.y) {
-      (*dist) = origin.x - relative_max.x;
-      return (*dist) > 0;
-    }
-  } else if (direction.x >= 0) {
-    if (relative_min.y < origin.y && relative_max.y > origin.y) {
-      (*dist) = relative_min.x - origin.x;
-      return (*dist) > 0;
-    }
-  }
-  return false;
-  */
-  //TODO Move somewhere else
-  return false;
-}
-
 void game_object::set_flip_x(bool flip) {
   get_game_state().m_flip_x = flip;
 }
@@ -158,11 +94,11 @@ void game_object::destroy(void) const{
 }
 
 game_state& game_object::get_game_state() const{
-  return game::m_current_instance->get_instance_manager().get_game_state(m_positional_id);
+  return game::get_game_instance()->get_instance_manager().get_game_state(m_positional_id);
 }
 extra_state& game_object::get_extra_state() const{
-  return game::m_current_instance->get_instance_manager().get_extra_state(m_positional_id);
+  return game::get_game_instance()->get_instance_manager().get_extra_state(m_positional_id);
 }
 engine_state& game_object::get_engine_state(void) const{
-  return game::m_current_instance->get_instance_manager().get_engine_state(m_positional_id);
+  return game::get_game_instance()->get_instance_manager().get_engine_state(m_positional_id);
 }

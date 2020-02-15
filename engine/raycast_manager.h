@@ -15,9 +15,7 @@ class raycast_manager {
   //@param[in] direction the direction of the ray (has to be (+-1,0) OR (0,+-1)
   //@param[out] dist a pointer to a integer which the distance will be written
   //to
-  //@param[out] a pointer to the pointer of the object that was hit
-  bool raycast(const ivec2 origin, const ivec2 direction, int *dist,
-               game_object **object);
+  bool raycast(const ivec2 origin, const ivec2 direction, int *dist);
 
   // Sets the object vector that will be used during raycasting
   // Usually only called once

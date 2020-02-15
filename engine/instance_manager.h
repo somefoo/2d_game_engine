@@ -50,7 +50,9 @@ T* instantiate() {
       "Only classes inheriting from game_object can be instantiated.");
   //TODO ensure this constructor is always available.
   T *o = new T();
-  add((game_object *)o);
+  std::cout << "bef" << o << std::endl;
+  add(static_cast<game_object*>(o));
+  std::cout << "aft" << o << std::endl;
   return o;
 }
 

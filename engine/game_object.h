@@ -117,21 +117,10 @@ class game_object {
   //@return the current sprite of the object
   unsigned short get_sprite(void) const;
 
-  // Checks if point lies within bounding box of sprite
-  //@param location the point that will be checked against the bounding box
-  //@return true if point lies within the bounding box
-  bool hit_bounding_box(ivec2 location) const;
   // Checks if sprite exists (not 0) at location (pixel)
   //@param location the point that will be checked against the sprite
   //@return true if pixel != 0 at location, false otherwise
   bool hit(ivec2 location) const;
-  // Checks if bounding box penetrated by ray
-  // param[in] origin origin of ray
-  // param[in] direction direction of the ray
-  // param[out] dist pointer to float value where distance will be written to if
-  // hit
-  bool hit_ray_bounding_box(const ivec2 origin, const ivec2 direction,
-                            int* dist) const;
 
   // Set the flip value for the x axis
   //@param flip flips or not
@@ -162,11 +151,11 @@ class game_object {
   // Called on object creation
   virtual void init(void) = 0;
 
+  unsigned short m_positional_id;
  private:
   //We need a way to allow access to the object
   //without giving sub-classes access
   friend class game_object_accessor;
-  unsigned short m_positional_id;
 
   void set_engine_state(engine_state *const es);
   engine_state& get_engine_state(void) const;

@@ -28,12 +28,12 @@ void scene::init(void){
   
   tile_large* t = game::instantiate<tile_large>();
   t->set_position({42,0});
-  //t = game::instantiate<tile_large>();
+  t = game::instantiate<tile_large>();
   enemy* e = game::instantiate<enemy>();
   e->set_position({50,32});
-  //t = game::instantiate<tile_large>();
-//  player* pl = game::instantiate<player>();
-//  pl->set_position({40,90});
+  t = game::instantiate<tile_large>();
+  player* pl = game::instantiate<player>();
+  pl->set_position({40,90});
   
 
   //tile_large* t = game::instantiate<tile_large>();
